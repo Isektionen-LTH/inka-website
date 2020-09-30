@@ -1,0 +1,53 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    include includes/navbar.pug
+
+    .container.mt-5
+      .row
+        .col
+          form(method='post')
+            .row
+              .col
+                h1
+                  input.form-control(type='text', placeholder='Visningsnamn', name='name', value=business.name)
+              .col-2
+                input.btn.btn-primary(type='submit', value='Spara')
+            .row(style='margin-top: 24px;')
+              .col
+                label
+                  strong Kontaktperson i INKA
+                .form-group
+                  input.form-control(type='text', disabled, value=business.inka.name + ' <' + business.inka.username + '>')
+                label
+                  strong Er kontaktperson
+                .form-group
+                  input.form-control(type='text', name='contact[name]', placeholder='Namn på kontaktperson', value=business.contact.name, required)
+                .form-group
+                  input.form-control(type='email', name='contact[email]', placeholder='Epost till kontaktperson', value=business.contact.email, required)
+          
+            .row(style='margin-top: 24px;')
+              .col
+                h3 Marknadsföringsinformation
+            .row
+              .col
+                label
+                  strong Om oss
+                .form-group
+                  textarea.form-control(name='info[about]')= business.info.about
+            .row
+              .col
+                label
+                  strong Vi erbjuder
+                each offer in business.info.offers
+                  .form-check
+                    input.form-check-input(type='checkbox', name='info[offers][]', checked=offer.value, value=offer.name)
+                    label.form-check-label= offer.name
+
+        //.col-4
+          h2 Status
+      
+
+    include includes/scripts.pug

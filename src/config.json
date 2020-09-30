@@ -1,0 +1,23 @@
+{
+  "password": {
+    "zxcvbnMinScore": 2,
+    "resetTokenMaxAge": 3600000,
+    "saltRounds": 10
+  },
+  "db": {
+    "connectionString": "mongodb://db:27017",
+    "databaseName": "inka",
+    "connectionOptions": {
+      "useUnifiedTopology": true
+    }
+  },
+  "businesses": {
+    "enabledOffers": [
+      "Sommarjobb",
+      "Internships",
+      "Deltidsarbete",
+      "Examensarbete",
+      "Trainee"
+    ]
+  }
+}

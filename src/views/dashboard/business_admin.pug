@@ -1,0 +1,38 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    include includes/navbar.pug
+
+    .container(style='margin-top: 50px;')
+      .row
+        .col
+          h1= business.name
+          h6.text-monospace.text-secondary= business.username
+        .col-2
+          a.btn.btn-primary(role='button', href='/dashboard/' + business.username + '/edit') Redigera
+      .row(style='margin-top: 24px;')
+        .col
+          label
+            strong Kontaktperson på företaget
+          p= business.contact.name + ' <' + business.contact.email + '>'
+          label
+            strong Kontaktperson i INKA
+          p= business.inka.name + ' <' + business.inka.email + '>'
+      .row(style='margin-top: 24px;')
+        .col
+          label
+            strong Om oss
+          p= business.info.about
+      .row
+        .col
+          label
+            strong Vi erbjuder
+          each offer in business.info.offers
+            .form-check
+              input.form-check-input(type='checkbox' disabled checked=offer.value)
+              label.form-check-label= offer.name
+
+    include includes/scripts.pug
+

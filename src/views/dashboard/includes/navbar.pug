@@ -1,0 +1,15 @@
+nav.navbar.navbar-dark.navbar-expand-md.bg-dark.navigation-clean
+  .container
+    a.navbar-brand(href='/dashboard') INKA Företagssida
+    button.navbar-toggler(data-toggle='collapse', data-target='#navcol-1')
+      span.navbar-toggler-icon
+    #navcol-1.collapse.navbar-collapse
+      ul.nav.navbar-nav.ml-auto
+        if (user.type === 'admin')
+          li.nav-item
+            a.nav-link(href='/dashboard') Företag
+        li.nav-item.dropdown
+          a.dropdown-toggle.nav-link(data-toggle='dropdown', aria-expanded='false', href='#')= user.name
+          .dropdown-menu
+            a.dropdown-item(href='/dashboard/settings') Inställningar
+            a.dropdown-item(href='/logout') Logga ut

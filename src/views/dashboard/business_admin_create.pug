@@ -1,0 +1,38 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    include includes/navbar.pug
+
+    .container(style='margin-top: 50px;')
+      form(method='post')
+        .row
+          .col
+            .h5 Skapa nytt företagskonto
+        .row
+          .col
+            h1
+              input#nameInput(type='text', placeholder='Visningsnamn', name='name')
+              input#usernameInput(type='hidden', name='username')
+            h6#usernameLabel.text-monospace.text-secondary
+          .col-2
+            input.btn.btn-primary(type='submit', value='Spara')
+        .row(style='margin-top: 24px;')
+          .col
+            label
+              strong Kontaktperson på företaget
+            div
+              input(type='text', name='contact[name]', placeholder='Namn på kontaktperson', required)
+            div
+              input(type='email', name='contact[email]', placeholder='Epost till kontaktperson', required)
+            label
+              strong Kontaktperson i INKA
+            div
+              select(name='inka')
+                each admin in admins
+                  option(value=admin.username, selected= user.username === admin.username)= admin.name
+
+    include includes/scripts.pug
+    script(src='/js/dashboard/create.js')
+

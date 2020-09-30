@@ -1,0 +1,46 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    include includes/navbar.pug
+
+    .container(style='margin-top: 50px;')
+      form(method='post')
+        .row
+          .col
+            h1
+              input(type='text', placeholder='Visningsnamn', name='name', value=business.name)
+            h6.text-monospace.text-secondary= business.username
+          .col-2
+            input.btn.btn-primary(type='submit', value='Spara')
+        .row(style='margin-top: 24px;')
+          .col
+            label
+              strong Kontaktperson på företaget
+            div
+              input(type='text', name='contact[name]', placeholder='Namn på kontaktperson', value=business.contact.name, required)
+            div
+              input(type='email', name='contact[email]', placeholder='Epost till kontaktperson', value=business.contact.email, required)
+            label
+              strong Kontaktperson i INKA
+            div
+              select(name='inka')
+                each admin in admins
+                  option(value=admin.username, selected= business.inka.username === admin.username)= admin.name
+        .row(style='margin-top: 24px;')
+          .col
+            label
+              strong Om oss
+            div
+              textarea(name='info[about]')= business.info.about
+        .row
+          .col
+            label
+              strong Vi erbjuder
+            each offer in business.info.offers
+              .form-check
+                input.form-check-input(type='checkbox', checked=offer.value, name='info[offers][]', value= offer.name)
+                label.form-check-label= offer.name
+
+    include includes/scripts.pug
