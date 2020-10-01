@@ -5,7 +5,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "if [$NODE_ENV == 'production']; then npm run prod; else npm run dev; fi",
+    "start": "if [[ $NODE_ENV == 'production' ]]; then npm run prod; else npm run dev; fi",
     "prod": "node src/app.js",
     "dev": "nodemon --ignore sessions -L src/app.js"
   },
