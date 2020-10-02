@@ -11,6 +11,8 @@ services:
         volumes:
             - ./src:/app/src:ro
             - userfiles:/app/userfiles
+        environment:
+            - NODE_ENV=development
     db:
         image: mongo:4.4
         restart: always
