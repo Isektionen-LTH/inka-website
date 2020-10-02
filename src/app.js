@@ -1,14 +1,14 @@
 const fs = require('fs')
 const express = require('express')
 const session = require('express-session')
-const FileStore = require('session-file-store')(session)
+const MongoStore = require('connect-mongo')(session)
 const bodyParser = require('body-parser')
 
 const homeRoutes = require('./routes/home')
 const dashboardRoutes = require('./routes/dashboard')
 const apiRoutes = require('./routes/api')
 
-
+const config = require('./config')
 const port = process.env.PORT || 3000
 const app = express()
 
@@ -16,7 +16,7 @@ const app = express()
 // Config
 const publicDir = 'src/public' // The public directory
 let sessionConfig = {
-  store: new FileStore(),
+  store: new MongoStore({ url: config.db.connectionString, mongoOptions: config.db.connectionOptions }),
   secret: 'changeme', // Set the secret
   resave: false, // Do not force a resave on each request
   saveUninitialized: false, // Do not save an empty session
