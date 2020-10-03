@@ -17,19 +17,50 @@ html
             .col
               label
                 strong Kontaktperson i INKA
-              p!= business.inka.name + ' &lt;<a href="mailto:' + business.inka.username + '">' + business.inka.username + '</a>&gt;'
+              p
+                em
+                  = business.inka.name + ' <'
+                  a(href= 'mailto:' + business.inka.username)= business.inka.username
+                  = '>'
               label
                 strong Er kontaktperson
-              p= business.contact.name + ' <' + business.contact.email + '>'
-          
-          .row(style='margin-top: 24px;')
+              p
+                em= business.contact.name + ' <' + business.contact.email + '>'
+          .row.mt-5
+            .col
+              h3 Fakturering
+          .row
+            .col
+              label
+                strong Avtalstecknare
+              .row
+                .col-1 Namn:
+                .col
+                  em= business.billing.signer.name
+              .row
+                .col-1 Email:
+                .col
+                  em= business.billing.signer.email
+              .row
+                .col-1 Tel:
+                .col
+                  em= business.billing.signer.phone
+              p 
+          .row
+            .col
+              label
+                strong Organisationsnummer
+              p
+                em= business.billing.orgNumber
+          .row.mt-5
             .col
               h3 Marknadsföringsinformation
           .row
             .col
               label
                 strong Om oss
-              p= business.info.about
+              p
+                em= business.info.about
           .row
             .col
               label
@@ -37,7 +68,8 @@ html
               each offer in business.info.offers
                 .form-check
                   input.form-check-input(type='checkbox' disabled checked=offer.value)
-                  label.form-check-label= offer.name
+                  label.form-check-label
+                    em= offer.name
 
         //.col-4
           h2 Status

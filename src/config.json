@@ -13,11 +13,14 @@
   },
   "businesses": {
     "enabledOffers": [
-      "Sommarjobb",
-      "Internships",
-      "Deltidsarbete",
-      "Examensarbete",
-      "Trainee"
+      "Examensarbete ",
+      "Extrajobb/timanställning ",
+      "Internship ",
+      "Praktik",
+      "Sommarjobb ",
+      "Tillsvidareanställning",
+      "Traineeprogram",
+      "Utlandsmöjligheter"
     ]
   }
 }

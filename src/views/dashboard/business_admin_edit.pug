@@ -28,7 +28,42 @@ html
               select(name='inka')
                 each admin in admins
                   option(value=admin.username, selected= business.inka.username === admin.username)= admin.name
-        .row(style='margin-top: 24px;')
+            label
+              strong Non-profit
+            div
+              select(name='nonProfit')
+                option(value='false', selected= !business.nonProfit) Nej
+                option(value='true', selected= business.nonProfit) Ja
+        .row.mt-5
+          .col
+            h3 Fakturering
+        .row
+          .col
+            label
+              strong Avtalstecknare
+            .row
+              .col-1 Namn:
+              .col
+                input(type='text', name='billing[signer][name]', value= business.billing.signer.name)
+            .row
+              .col-1 Email:
+              .col
+                input(type='email', name='billing[signer][email]', value= business.billing.signer.email)
+            .row
+              .col-1 Tel:
+              .col
+                input(type='text', name='billing[signer][phone]', value= business.billing.signer.phone)
+              p
+        .row
+          .col
+            label
+              strong Organisationsnummer
+            div
+              input(type='text', name='billing[orgNumber]', value= business.billing.orgNumber)
+        .row.mt-5
+          .col
+            h3 Marknadsföring
+        .row
           .col
             label
               strong Om oss

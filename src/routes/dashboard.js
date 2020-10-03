@@ -56,7 +56,7 @@ router.get('/business/create', Auth.requireAdminPrivileges, async (req, res) => 
 /**
  * Create a new business account
  */
-router.post('/create', Auth.requireAdminPrivileges, async (req, res) => {
+router.post('/business/create', Auth.requireAdminPrivileges, async (req, res) => {
   const createBusinessDefault = {
     username: '',
     name: '',
@@ -103,10 +103,17 @@ router.get('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
  */
 router.post('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
   const businessEditDefaults = {
-    name: '',
     contact: {
       name: '',
       email: ''
+    },
+    billing: {
+      signer: {
+        name: '',
+        email: '',
+        phone: ''
+      },
+      orgNumber: ''
     },
     info: {
       about: '',
@@ -214,22 +221,31 @@ router.post('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => 
       name: '',
       email: ''
     },
+    billing: {
+      signer: {
+        name: '',
+        email: '',
+        phone: ''
+      },
+      orgNumber: ''
+    },
     inka: '',
+    nonProfit: false,
     info: {
-      about: '',
       offers: []
     }
   }
 
   // Sanitize input
   const rawData = req.body
-  if (!Utils.isSubset(rawData, adminEditDefaults)) {
-    res.status(400).send()
-    return
-  }
+  //if (!Utils.isSubset(rawData, adminEditDefaults)) {
+  //  res.status(400).send()
+  //  return
+  //}
 
   // Merge the body with defaults to provide defaults for empty arrays
   const data = Utils.mergeDeep(adminEditDefaults, rawData)
+  data.nonProfit = data.nonProfit == 'true'
 
   const business = await DB.findUser(req.params.business)
   const merged = Utils.mergeDeep(business, data)

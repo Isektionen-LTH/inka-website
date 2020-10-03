@@ -4,9 +4,17 @@ const DB = require('../db')
 
 const routes = express.Router()
 
-routes.get('/', (req, res) => res.send('Hello World'))
+routes.get('/', (req, res) => res.redirect('/login'))
 
 routes.get('/login', (req, res) => {
+  if (Auth.signedInUser(req)) {
+    if (req.session.type === 'admin' || req.session.type === 'business') {
+      res.redirect('/dashboard')
+    }
+    else {
+      // TODO Redirect to app
+    }
+  }
   res.render('login')
 })
 

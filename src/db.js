@@ -35,18 +35,27 @@ class DB {
     const db = client.db(config.db.databaseName)
     const users = db.collection(userCollection)
 
-    const creatBusinessDefault = {
+    const createBusinessDefault = {
       username: '',
       password: '',
       type: 'business',
       inka: '',
+      nonProfit: false,
+      billing: {
+        signer: {
+          name: '',
+          email: '',
+          phone: ''
+        },
+        orgNumber: ''
+      },
       info: {
         about: '',
         offers: []
       }
     }
 
-    const business = Utils.mergeDeep(creatBusinessDefault, businessFields)
+    const business = Utils.mergeDeep(createBusinessDefault, businessFields)
     await users.insertOne(business)
 
     await client.close()

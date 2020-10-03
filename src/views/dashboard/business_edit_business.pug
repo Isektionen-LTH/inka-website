@@ -11,11 +11,10 @@ html
           form(method='post')
             .row
               .col
-                h1
-                  input.form-control(type='text', placeholder='Visningsnamn', name='name', value=business.name)
+                h1= business.name
               .col-2
                 input.btn.btn-primary(type='submit', value='Spara')
-            .row(style='margin-top: 24px;')
+            .row.mt-5
               .col
                 label
                   strong Kontaktperson i INKA
@@ -27,8 +26,27 @@ html
                   input.form-control(type='text', name='contact[name]', placeholder='Namn på kontaktperson', value=business.contact.name, required)
                 .form-group
                   input.form-control(type='email', name='contact[email]', placeholder='Epost till kontaktperson', value=business.contact.email, required)
-          
-            .row(style='margin-top: 24px;')
+            .row.mt-5
+              .col
+                h3 Fakturering
+            .row
+              .col
+                label
+                  strong Avtalstecknare
+                .form-group
+                  input.form-control(type='text', name='billing[signer][name]', placeholder='Namn på avtalstecknare', value=business.billing.signer.name)
+                .form-group
+                  input.form-control(type='email', name='billing[signer][email]', placeholder='Epost till avtalstecknare', value=business.billing.signer.email)
+                .form-group
+                  input.form-control(type='text', name='billing[signer][phone]', placeholder='Telefonnummer till avtalstecknare', value=business.billing.signer.phone)
+            .row
+              .col
+                label
+                  strong Organisationsnummer
+                .form-group
+                  input.form-control(type='text', name='billing[orgNumber]', placeholder='Organisationsnummer', value=business.billing.orgNumber)
+                
+            .row.mt-5
               .col
                 h3 Marknadsföringsinformation
             .row
