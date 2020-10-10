@@ -17,7 +17,7 @@ const app = express()
 const publicDir = 'src/public' // The public directory
 let sessionConfig = {
   store: new MongoStore({ url: config.db.connectionString, mongoOptions: config.db.connectionOptions }),
-  secret: 'changeme', // Set the secret
+  secret: config.session.secret, // Set the secret
   resave: false, // Do not force a resave on each request
   saveUninitialized: false, // Do not save an empty session
   cookie: { 
@@ -25,19 +25,9 @@ let sessionConfig = {
   }
 }
 
-// Production config
+// Production config not set by environment variables
 if (app.get('env') === 'production') {
-  // Make sure the environment is set up correctly
-  const requiredEnv = ['SESSION_SECRET']
-  requriedEnv.forEach(env => {
-    if (!process.env[env]) {
-      console.error('Required environemnt variable not set: ' + env)
-      process.exit(1)
-    }
-  })
-
   app.set('trust proxy', 1) // Trust first proxy
-  sessionConfig.secure = process.env.SESSION_SECRET // Set the session secret
   sessionConfig.cookie.secure = true // Only send session cookie over HTTPS
 }
 

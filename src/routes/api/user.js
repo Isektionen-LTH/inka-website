@@ -1,5 +1,6 @@
 const express = require('express')
 const zxcvbn = require('zxcvbn')
+const uuid = require('uuid')
 const DB = require('../../db')
 const Auth = require('../../auth')
 const Utils = require('../../utils')
@@ -59,10 +60,12 @@ router.post('/changePassword', async (req, res) => {
     // Set password by token
     if (await DB.setPasswordByToken(passwordResetToken, await Auth.hashPassword(newPassword))) {
       res.status(204).send()
+      return
     }
     else {
       // Password reset with token failed, probably expired
-      res.status(401).send()
+      res.status(401).send('Password reset token expired')
+      return
     }
   }
   else if (oldPassword) {
@@ -76,10 +79,12 @@ router.post('/changePassword', async (req, res) => {
         // Set password by username and old password
         await DB.setPasswordByUsername(user.username, passwordHash)
         res.status(204).send()
+        return
       }
       else {
         // Wrong oldPassword
         res.status(400).send()
+        return
       }
     }
     else {

@@ -28,24 +28,46 @@ html
                   input.form-control(type='email', name='contact[email]', placeholder='Epost till kontaktperson', value=business.contact.email, required)
             .row.mt-5
               .col
-                h3 Fakturering
+                h3 Avtalskontakt
             .row
               .col
                 label
                   strong Avtalstecknare
                 .form-group
-                  input.form-control(type='text', name='billing[signer][name]', placeholder='Namn på avtalstecknare', value=business.billing.signer.name)
+                  input.form-control(type='text', name='billing[signer][name]', placeholder='Namn på avtalstecknare', value= business.billing.signer.name)
                 .form-group
-                  input.form-control(type='email', name='billing[signer][email]', placeholder='Epost till avtalstecknare', value=business.billing.signer.email)
+                  input.form-control(type='email', name='billing[signer][email]', placeholder='Epost till avtalstecknare', value= business.billing.signer.email)
                 .form-group
-                  input.form-control(type='text', name='billing[signer][phone]', placeholder='Telefonnummer till avtalstecknare', value=business.billing.signer.phone)
+                  input.form-control(type='text', name='billing[signer][phone]', placeholder='Telefonnummer till avtalstecknare', value= business.billing.signer.phone)
+            .row
+              .col
+                label
+                  strong Företagsadress
+                .form-group
+                  input.form-control(type='text', name='billing[address]', placeholder='Faktureringsaddress', value= business.billing.address)
             .row
               .col
                 label
                   strong Organisationsnummer
                 .form-group
-                  input.form-control(type='text', name='billing[orgNumber]', placeholder='Organisationsnummer', value=business.billing.orgNumber)
-                
+                  input.form-control(type='text', name='billing[orgNumber]', placeholder='Organisationsnummer', value= business.billing.orgNumber)
+            .row.mt-5
+              .col
+                h3 Anmälan
+            .row.mb-1
+              .col
+                .form-check
+                  input.form-check-input(type='checkbox', disabled, checked)
+                  label.form-check-label Baspaket (ingår i grunderbjudandet)
+            .row
+              .col
+                label
+                  strong Tillägg 
+                each addon in business.registration.addons
+                  .form-check
+                    input.form-check-input(type='checkbox', name='registration[addons][]' , checked= addon.value, value= addon.name)
+                    label.form-check-label= addon.name
+          //
             .row.mt-5
               .col
                 h3 Marknadsföringsinformation
@@ -68,4 +90,5 @@ html
           h2 Status
       
 
+    include includes/footer.pug
     include includes/scripts.pug

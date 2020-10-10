@@ -45,9 +45,13 @@ class DB {
         signer: {
           name: '',
           email: '',
-          phone: ''
+          phone: '',
         },
+        address: '',
         orgNumber: ''
+      },
+      registration: {
+        addons: []
       },
       info: {
         about: '',
@@ -99,21 +103,29 @@ class DB {
    * Set new password based on password reset token
    */
   static async setPasswordByToken(token, newPassword) {
-    const user = db.find('/users', u => u.passwordResetToken && u.passwordResetToken.value === token)
+    const client = await this.configuredClient()
+    const db = client.db(config.db.databaseName)
+    const users = db.collection(userCollection)
 
-    if (!user) return false
+    const user = await users.findOne({ 'passwordResetToken.token': token })
 
-    const userIndex = db.getIndex('/users', 'username', user.username)
+    if (!user) {
+      await client.close()
+      return false
+    }
 
-    if (new Date() - user.paswordResetToken.created > config.password.resetTokenMaxAge) {
+
+    if ((new Date()).getTime() - user.passwordResetToken.created > config.password.resetTokenMaxAge) {
       // Expire token
-      db.push(`/users[${userIndex}]/passwordResetToken`, null, true)
+      await users.updateOne({ username: user.username }, { $set: { passwordResetToken: null } })
+      await client.close()
       return false
     }
 
     // Update the password and token
-    db.push(`/users[${userIndex}]/password`, newPassword, true)
-    db.push(`/users[${userIndex}]/passwordResetToken`, null, true)
+    await users.updateOne({ username: user.username }, { $set: { password: newPassword, passwordResetToken: null } })
+    await client.close()
+    return true
   }
 
   /**

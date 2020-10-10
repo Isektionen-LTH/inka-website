@@ -1,6 +1,8 @@
 const express = require('express')
+const uuid = require('uuid')
 const Auth = require('../auth')
 const DB = require('../db')
+const Mailer = require('../mailer')
 
 const routes = express.Router()
 
@@ -10,6 +12,7 @@ routes.get('/login', (req, res) => {
   if (Auth.signedInUser(req)) {
     if (req.session.type === 'admin' || req.session.type === 'business') {
       res.redirect('/dashboard')
+      return
     }
     else {
       // TODO Redirect to app
@@ -64,6 +67,44 @@ routes.post('/login', async (req, res) => {
 routes.get('/logout', (req, res) => {
   Auth.signOutUser(req)
   res.redirect('/login')
+})
+
+routes.get('/forgotPassword', (req, res) => {
+  res.render('forgotPassword')
+})
+
+routes.post('/forgotPassword', async (req, res) => {
+  const { username } = req.body
+
+  if (!username) {
+    res.render('forgotPassword', { error: 'Något gick fel, testa att ladda om sidan' })
+    return
+  }
+
+  const user = await DB.findUser(username)
+
+  if (!user) {
+    // Show success even if user was not found
+    res.render('forgotPassword', { showSuccess: true })
+    return
+  }
+
+  user.passwordResetToken = {
+    token: uuid.v4(),
+    created: (new Date()).getTime()
+  }
+
+  await DB.updateUser(username, user)
+
+  await Mailer.sendPasswordReset(user)
+
+  res.render('forgotPassword', { showSuccess: true })
+})
+
+routes.get('/resetPassword', async (req, res) => {
+  const passwordResetToken = req.query.token
+
+  res.render('resetPassword', { passwordResetToken })
 })
 
 module.exports = routes

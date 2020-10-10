@@ -1,7 +1,9 @@
 const express = require('express')
+const uuid = require('uuid')
 const DB = require('../db')
 const Auth = require('../auth')
 const Utils = require('../utils')
+const Mailer = require('../mailer')
 
 const config = require('../config')
 
@@ -30,6 +32,15 @@ router.get('/', Auth.requireSignedIn, async (req, res) => {
   }
   else if (user.type === 'business') {
     user.inka = await DB.findUser(user.inka)
+    // Create addons array
+    user.registration.addons = config.businesses.registrationAddons.map(a => {
+      return {
+        name: a,
+        value: user.registration.addons.includes(a)
+      }
+    })
+    
+    // Create offers array
     user.info.offers = config.businesses.enabledOffers.map(o => {
       return {
         name: o,
@@ -73,10 +84,15 @@ router.post('/business/create', Auth.requireAdminPrivileges, async (req, res) =>
     return
   }
 
+  // Generate new password reset token and make it "never" expire
+  rawData.passwordResetToken = {
+    token: uuid.v4(),
+    created: (new Date('9999-12-31')).getTime()
+  }
 
   const business = await DB.createBusiness(rawData)
 
-  // TODO Email contact with information about how to log in
+  await Mailer.sendAccountCreated(business)
 
   res.redirect('/dashboard')
 })
@@ -85,17 +101,27 @@ router.post('/business/create', Auth.requireAdminPrivileges, async (req, res) =>
  * Show business edit page
  */
 router.get('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
-  const user = await DB.findUser(req.session.username)
+  const business = await DB.findUser(req.session.username)
 
-  user.inka = await DB.findUser(user.inka)
-  user.info.offers = config.businesses.enabledOffers.map(o => {
+  business.inka = await DB.findUser(business.inka)
+
+  // Build addons array
+  business.registration.addons = config.businesses.registrationAddons.map(a => {
     return {
-      name: o,
-      value: user.info.offers.includes(o)
+      name: a,
+      value: business.registration.addons.includes(a)
     }
   }) 
 
-  res.render('dashboard/business_edit_business', { user, business: user })
+  // Build offers array
+  business.info.offers = config.businesses.enabledOffers.map(o => {
+    return {
+      name: o,
+      value: business.info.offers.includes(o)
+    }
+  }) 
+
+  res.render('dashboard/business_edit_business', { user: business, business })
 })
 
 /**
@@ -111,9 +137,13 @@ router.post('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
       signer: {
         name: '',
         email: '',
-        phone: ''
+        phone: '',
       },
+      address: '',
       orgNumber: ''
+    },
+    registration: {
+      addons: []
     },
     info: {
       about: '',
@@ -161,6 +191,16 @@ router.get('/:business', Auth.requireAdminPrivileges, async (req, res) => {
   const inkaUsername = safeBusiness.inka
   safeBusiness.inka = Utils.sanitizeUser(await DB.findUser(inkaUsername))
   safeBusiness.inka.email = inkaUsername
+
+  // Build addons array
+  safeBusiness.registration.addons = config.businesses.registrationAddons.map(a => {
+    return {
+      name: a,
+      value: safeBusiness.registration.addons.includes(a)
+    }
+  })
+
+  // Build offers array
   safeBusiness.info.offers = config.businesses.enabledOffers.map(o => {
     return {
       name: o,
@@ -169,9 +209,7 @@ router.get('/:business', Auth.requireAdminPrivileges, async (req, res) => {
   })
 
   res.render('dashboard/business_admin', {
-    user: {
-      name: user.name
-    },
+    user,
     business
   })
 })
@@ -191,6 +229,14 @@ router.get('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => {
 
   const admins = await DB.getAdmins()
 
+  // Build addons array
+  safeBusiness.registration.addons = config.businesses.registrationAddons.map(a => {
+    return {
+      name: a,
+      value: safeBusiness.registration.addons.includes(a)
+    }
+  })
+
   // Build offer array
   safeBusiness.info.offers = config.businesses.enabledOffers.map(o => {
     return {
@@ -201,9 +247,7 @@ router.get('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => {
 
 
   res.render('dashboard/business_admin_edit', {
-    user: {
-      name: user.name
-    },
+    user,
     business,
     admins
   })
@@ -227,10 +271,14 @@ router.post('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => 
         email: '',
         phone: ''
       },
+      address: '',
       orgNumber: ''
     },
     inka: '',
     nonProfit: false,
+    registration: {
+      addons: []
+    },
     info: {
       offers: []
     }

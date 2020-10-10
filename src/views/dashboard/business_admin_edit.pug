@@ -36,7 +36,7 @@ html
                 option(value='true', selected= business.nonProfit) Ja
         .row.mt-5
           .col
-            h3 Fakturering
+            h3 Avtalskontakt
         .row
           .col
             label
@@ -57,9 +57,32 @@ html
         .row
           .col
             label
+              strong Företagsadress
+            div
+              input(type='text', name='billing[address]', value= business.billing.address)
+        .row
+          .col
+            label
               strong Organisationsnummer
             div
               input(type='text', name='billing[orgNumber]', value= business.billing.orgNumber)
+        .row.mt-5
+          .col
+            h3 Anmälan
+        .row.mb-1
+          .col
+            .form-check
+              input.form-check-input(type='checkbox', disabled, checked)
+              label.form-check-label Baspaket (ingår i grunderbjudandet)
+        .row
+          .col
+            label
+              strong Tillägg 
+            each addon in business.registration.addons
+              .form-check
+                input.form-check-input(type='checkbox', name='registration[addons][]' , checked= addon.value, value= addon.name)
+                label.form-check-label= addon.name
+      //
         .row.mt-5
           .col
             h3 Marknadsföring
@@ -78,4 +101,5 @@ html
                 input.form-check-input(type='checkbox', checked=offer.value, name='info[offers][]', value= offer.name)
                 label.form-check-label= offer.name
 
+    include includes/footer.pug
     include includes/scripts.pug
