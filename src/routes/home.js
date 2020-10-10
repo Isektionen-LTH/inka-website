@@ -6,7 +6,9 @@ const Mailer = require('../mailer')
 
 const routes = express.Router()
 
-routes.get('/', (req, res) => res.redirect('/login'))
+routes.get('/', (req, res) => {
+  res.render('index')
+})
 
 routes.get('/login', (req, res) => {
   if (Auth.signedInUser(req)) {
