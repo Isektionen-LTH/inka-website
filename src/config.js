@@ -47,8 +47,8 @@ const config = {
 // Production config
 if (process.env.NODE_ENV === 'production') {
   // Make sure the environment is set up correctly
-  const requiredEnv = ['SESSION_SECRET', 'DOMAIN_NAME', 'MAILER_USERNAME', 'MAILER_PASSWORD', 'MAILER_SMTP_HOST', 'MAILER_SMTP_PORT']
-  requriedEnv.forEach(env => {
+  const requiredEnv = ['SESSION_SECRET', 'DOMAIN', 'MAILER_USERNAME', 'MAILER_PASSWORD', 'MAILER_SMTP_HOST', 'MAILER_SMTP_PORT']
+  requiredEnv.forEach(env => {
     if (!process.env[env]) {
       console.error('Required environemnt variable not set: ' + env)
       process.exit(1)
@@ -58,7 +58,7 @@ if (process.env.NODE_ENV === 'production') {
   // TODO Only do this once on the first load
   // Transfer env configs to config object
   config.nodeEnv = process.env.NODE_ENV
-  config.domain = process.env.DOMAIN_NAME
+  config.domain = process.env.DOMAIN
   config.mailer.host = process.env.MAILER_SMTP_HOST
   config.mailer.port = process.env.MAILER_SMTP_PORT
   config.mailer.auth.user = process.env.MAILER_USERNAME
