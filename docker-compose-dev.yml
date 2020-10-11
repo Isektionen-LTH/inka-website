@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+    app:
+        build: ./
+        restart: always
+        depends_on:
+            - db
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./src:/app/src:ro
+        environment:
+            - NODE_ENV=development
+    db:
+        image: mongo:4.4
+        restart: always
+        volumes:
+            - db_data:/data/db
+            - ./docker/mongo-init:/docker-entrypoint-initdb.d
+        environment:
+            - MONGO_INITDB_DATABASE=inka
+
+volumes:
+    db_data:

@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+    proxy:
+        image: caddy
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./docker/Caddyfile:/etc/caddy/Caddyfile
+            - caddy_data:/data
+            - caddy_config:/config
+    app:
+        build: ./
+        restart: always
+        depends_on:
+            - db
+        volumes:
+            - ./src:/app/src:ro
+        environment:
+            - NODE_ENV=production
+        env_file: 
+            - prod.env
+    db:
+        image: mongo:4.4
+        restart: always
+        volumes:
+            - db_data:/data/db
+            - ./docker/mongo-init:/docker-entrypoint-initdb.d
+        environment:
+            - MONGO_INITDB_DATABASE=inka
+    
+volumes:
+    db_data:
+    caddy_data:
+    caddy_config:

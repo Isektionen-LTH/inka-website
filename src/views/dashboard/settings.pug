@@ -1,0 +1,35 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    include includes/navbar.pug
+
+    .container.mt-5
+      .row
+        .col
+          h1 Inställningar
+          hr
+      .row
+        .col
+          h4 Byt lösenord
+          form#changePasswordForm
+            .form-group
+              label Nuvarande lösenord
+              input#oldPassword.form-control(type='password', name='oldPassword', required)
+            .form-group
+              label Nytt lösenord
+              input#newPassword.form-control(type='password', name='newPassword', required)
+              #passwordStrengthWrapper
+                .progress
+                  .progress-bar
+                p#passwordStrength
+                
+            .form-group
+              label Upprepa lösenord
+              input#newPasswordRepeat.form-control(type='password', name='newPasswordRepeat', required)
+            input.btn.btn-primary(type='submit', value='Spara')
+
+    include includes/scripts.pug
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js')
+    script(src='/js/dashboard/settings.js')

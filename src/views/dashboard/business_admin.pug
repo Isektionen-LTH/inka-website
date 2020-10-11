@@ -1,0 +1,98 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    include includes/navbar.pug
+
+    .container(style='margin-top: 50px;')
+      .row
+        .col
+          h1= business.name
+          h6.text-monospace.text-secondary= business.username
+        .col-2
+          a.btn.btn-primary(role='button', href='/dashboard/' + business.username + '/edit') Redigera
+      .row.mt-5
+        .col
+          label
+            strong Kontaktperson på företaget
+          p
+            em= business.contact.name + ' <' + business.contact.email + '>'
+          label
+            strong Kontaktperson i INKA
+          p
+            em= business.inka.name + ' <' + business.inka.email + '>'
+          label
+            strong Non-profit
+          p
+            em= business.nonProfit ? 'Ja' : 'Nej'
+      .row.mt-5
+        .col
+          h3 Avtalskontakt
+      .row
+        .col
+          label
+            strong Avtalstecknare
+          .row
+            .col-1 Namn:
+            .col
+              em= business.billing.signer.name
+          .row
+            .col-1 Email:
+            .col
+              em= business.billing.signer.email
+          .row
+            .col-1 Tel:
+            .col
+              em= business.billing.signer.phone
+          p
+      .row
+        .col
+          label
+            strong Företagsadress
+          p
+            em= business.billing.address
+      .row
+        .col
+          label
+            strong Organisationsnummer
+          p
+            em= business.billing.orgNumber
+      .row.mt-5
+        .col
+          h3 Anmälan
+      .row.mb-1
+        .col
+          .form-check
+            input.form-check-input(type='checkbox', disabled, checked)
+            label.form-check-label Baspaket (ingår i grunderbjudandet)
+      .row
+        .col
+          label
+            strong Tillägg 
+          each addon in business.registration.addons
+            .form-check
+              input.form-check-input(type='checkbox', disabled, checked= addon.value)
+              label.form-check-label
+                em= addon.name
+    //
+      .row.mt-5
+        .col
+          h3 Marknadsföring
+      .row
+        .col
+          label
+            strong Om oss
+          p= business.info.about
+      .row
+        .col
+          label
+            strong Vi erbjuder
+          each offer in business.info.offers
+            .form-check
+              input.form-check-input(type='checkbox', disabled, checked=offer.value)
+              label.form-check-label
+                em= offer.name
+
+    include includes/footer.pug
+    include includes/scripts.pug

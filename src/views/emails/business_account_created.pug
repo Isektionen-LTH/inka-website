@@ -1,0 +1,11 @@
+h3 Ditt konto har skapats
+
+p Ditt konto på INKAs företagssida har skapats men det krävs ett lösenord för att komma åt sidan
+
+p 
+  | För att sätta ett lösenord, gå till 
+  a(href= 'https://' + config.domain + '/resetPassword?token=' + business.passwordResetToken.token)= 'https://' + config.domain + '/resetPassword?token=' + business.passwordResetToken.token
+  |  och följ anvisningarna där
+
+p När lösenordet är satt kan du logga in på sidan med användarnamnet 
+  strong= business.username

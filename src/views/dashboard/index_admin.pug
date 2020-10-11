@@ -1,0 +1,31 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    include includes/navbar.pug
+
+    .container-fluid
+      .row
+        .col
+          a.btn.btn-sm.btn-primary.m-1(href='/dashboard/business/create') Skapa nytt företagskonto
+      .row
+        .col
+          .table-responsive
+            table.table
+              thead
+                tr
+                  th Företagsnamn
+                  th Mail till företag
+                  th Ansvarig i INKA
+                  th
+              tbody
+                each business in businesses
+                  tr
+                    td= business.name
+                    td= business.contact.name + ' <' + business.contact.email + '>'
+                    td= business.inka.name
+                    td
+                      a(href='/dashboard/' + business.username) Mer info
+
+    include includes/scripts.pug

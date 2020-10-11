@@ -1,0 +1,105 @@
+doctype html
+html
+  include includes/head.pug
+
+  body
+    include includes/navbar.pug
+
+    .container(style='margin-top: 50px;')
+      form(method='post')
+        .row
+          .col
+            h1
+              input(type='text', placeholder='Visningsnamn', name='name', value=business.name)
+            h6.text-monospace.text-secondary= business.username
+          .col-2
+            input.btn.btn-primary(type='submit', value='Spara')
+        .row(style='margin-top: 24px;')
+          .col
+            label
+              strong Kontaktperson på företaget
+            div
+              input(type='text', name='contact[name]', placeholder='Namn på kontaktperson', value=business.contact.name, required)
+            div
+              input(type='email', name='contact[email]', placeholder='Epost till kontaktperson', value=business.contact.email, required)
+            label
+              strong Kontaktperson i INKA
+            div
+              select(name='inka')
+                each admin in admins
+                  option(value=admin.username, selected= business.inka.username === admin.username)= admin.name
+            label
+              strong Non-profit
+            div
+              select(name='nonProfit')
+                option(value='false', selected= !business.nonProfit) Nej
+                option(value='true', selected= business.nonProfit) Ja
+        .row.mt-5
+          .col
+            h3 Avtalskontakt
+        .row
+          .col
+            label
+              strong Avtalstecknare
+            .row
+              .col-1 Namn:
+              .col
+                input(type='text', name='billing[signer][name]', value= business.billing.signer.name)
+            .row
+              .col-1 Email:
+              .col
+                input(type='email', name='billing[signer][email]', value= business.billing.signer.email)
+            .row
+              .col-1 Tel:
+              .col
+                input(type='text', name='billing[signer][phone]', value= business.billing.signer.phone)
+              p
+        .row
+          .col
+            label
+              strong Företagsadress
+            div
+              input(type='text', name='billing[address]', value= business.billing.address)
+        .row
+          .col
+            label
+              strong Organisationsnummer
+            div
+              input(type='text', name='billing[orgNumber]', value= business.billing.orgNumber)
+        .row.mt-5
+          .col
+            h3 Anmälan
+        .row.mb-1
+          .col
+            .form-check
+              input.form-check-input(type='checkbox', disabled, checked)
+              label.form-check-label Baspaket (ingår i grunderbjudandet)
+        .row
+          .col
+            label
+              strong Tillägg 
+            each addon in business.registration.addons
+              .form-check
+                input.form-check-input(type='checkbox', name='registration[addons][]' , checked= addon.value, value= addon.name)
+                label.form-check-label= addon.name
+      //
+        .row.mt-5
+          .col
+            h3 Marknadsföring
+        .row
+          .col
+            label
+              strong Om oss
+            div
+              textarea(name='info[about]')= business.info.about
+        .row
+          .col
+            label
+              strong Vi erbjuder
+            each offer in business.info.offers
+              .form-check
+                input.form-check-input(type='checkbox', checked=offer.value, name='info[offers][]', value= offer.name)
+                label.form-check-label= offer.name
+
+    include includes/footer.pug
+    include includes/scripts.pug
