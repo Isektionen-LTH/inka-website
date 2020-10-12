@@ -88,7 +88,7 @@ class Mailer {
         const html = this.renderEmail('password_reset_link', { config, user })
         
         const mail = {
-            subject: 'Konto skapat på INKAs företagssida',
+            subject: 'Återställ lösenord',
             html
         }
 
