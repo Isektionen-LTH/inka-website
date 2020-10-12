@@ -6,6 +6,16 @@ const emailTemplatesDir = __dirname + '/views/emails/'
 
 class Mailer {
     /**
+     * Get the sender object for the app
+     */
+    static getSender() {
+        return {
+            name: config.mailer.senderName,
+            address: config.mailer.auth.user
+        }
+    }
+
+    /**
      * Get the configured transport or a test account if in dev
      */
     static async getTransport() {
@@ -30,6 +40,8 @@ class Mailer {
      * Send an email and return the success status
      */
     static async sendMail(mail) {
+        mail.from = this.getSender()
+
         const transport = await this.getTransport()
         
         const info = await transport.sendMail(mail)
@@ -60,7 +72,6 @@ class Mailer {
         const html = this.renderEmail('business_account_created', { config, business })
 
         const mail = {
-            from: `${config.mailer.senderName} <${config.mailer.auth.user}>`,
             to: business.contact.email,
             subject: 'Konto skapat på INKAs företagssida',
             html
@@ -77,7 +88,6 @@ class Mailer {
         const html = this.renderEmail('password_reset_link', { config, user })
         
         const mail = {
-            from: `${config.mailer.senderName} <${config.mailer.auth.user}>`,
             subject: 'Konto skapat på INKAs företagssida',
             html
         }
