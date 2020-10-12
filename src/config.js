@@ -6,7 +6,7 @@ const config = {
   },
   password: {
     zxcvbnMinScore: 2,
-    resetTokenMaxAge: 3600000,
+    resetTokenMaxAge: 3600000, // 1 h 
     saltRounds: 10
   },
   db: {
