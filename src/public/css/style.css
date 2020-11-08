@@ -1,0 +1,141 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: red;
+}
+
+#navbar {
+  display: flex;
+  justify-content: right;
+  background-color: #b75d69;
+}
+
+#navbarSupportContent {
+  display: flex;
+  justify-content: right;
+}
+
+#navbarLogo {
+  position: absolute;
+  top: 20px;
+  left: 60px;
+  width: 180px;
+  z-index: 100;
+}
+
+#navbarLip {
+  position: relative;
+  top: 0;
+  left: -5px;
+  width: 100%;
+}
+
+#section1 {
+  background-image: url(/img/section1-background.jpg);
+  background-position: 50% 70%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  -webkit-box-shadow: inset 0px 300px 200px -200px #000000;
+  -moz-box-shadow: inset 0px 300px 200px -200px #000000;
+  box-shadow: inset 0px 300px 200px -200px #000000;
+
+  height: 110vh;
+}
+
+#jumbotronContent {
+  margin-top: -2rem;
+}
+#jumbotronContent * {
+  text-align: center;
+  color: #ffffff;
+}
+
+#jumbotronContent h3 {
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+#jumbotronContent h1 {
+  font-weight: 900;
+  font-size: 3rem;
+}
+
+#section2 {
+  background-color: #B75D69;
+  color: #FFFFFF;
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#section2 .text {
+  padding: 3rem 10rem;
+}
+
+#section2 h2 {
+  font-weight: 900;
+}
+
+#section2 #featherImage {
+  position: absolute;
+  top: -10vh;
+  right: 10rem;
+  float: right;
+  height: 110vh;
+}
+
+#section3 {
+  background-color: #eacdc2;
+  padding: 3rem 10rem;
+}
+
+
+#section4 {
+  background-image: url(/img/section4-background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  height: 120vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media(min-aspect-ratio: 16/9) {
+  #section4 {
+    background-size: 125% auto;
+  }
+}
+
+#section5Header {
+  background-image: url(/img/wave5.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2rem;
+  color: #ffffff;
+}
+
+#section5Header h2 {
+  float: right;
+}
+
+#section5 {
+  background-color: #b75d69;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#section5 h2 {
+  text-align: center;
+  padding: 50vh 0;
+  font-size: 2rem;
+}
+
+#section5 .waveBottom {
+  fill: #372549;
+}
