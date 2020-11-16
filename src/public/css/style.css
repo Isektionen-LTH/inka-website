@@ -2,40 +2,60 @@
   font-family: 'Roboto', sans-serif;
 }
 
-body {
-  background-color: red;
-}
-
 #navbar {
-  display: flex;
-  justify-content: right;
   background-color: #b75d69;
 }
 
-#navbarSupportContent {
-  display: flex;
-  justify-content: right;
+.navbar-toggler {
+  border: none;
+  margin-left: auto;
 }
 
 #navbarLogo {
   position: absolute;
-  top: 20px;
-  left: 60px;
-  width: 180px;
+  top: 1.5rem;
+  left: 4rem;
+  width: 11rem;
   z-index: 100;
+}
+
+@media(max-width: 1300px) {
+  #navbarLogo {
+    width: 8rem;
+  }
+}
+
+@media(max-width: 900px) {
+  #navbarLogo {
+    left: 3rem;
+    width: 5rem;
+  }
+}
+
+@media(max-width: 450px) {
+  #navbarLogo {
+    top: 1rem;
+    left: 2rem;
+    width: 5rem;
+  }
 }
 
 #navbarLip {
   position: relative;
   top: 0;
-  left: -5px;
+  left: 0;
   width: 100%;
+}
+
+#navbarSupportedContent ul {
+  margin-left: auto;
+  text-align: right;
 }
 
 #section1 {
   background-image: url(/img/section1-background.jpg);
-  background-position: 50% 70%;
-  background-size: 100%;
+  background-size: auto 100%;
+  background-position: center;
   background-repeat: no-repeat;
   -webkit-box-shadow: inset 0px 300px 200px -200px #000000;
   -moz-box-shadow: inset 0px 300px 200px -200px #000000;
@@ -44,9 +64,22 @@ body {
   height: 110vh;
 }
 
+@media(min-aspect-ratio: 12/9) {
+  #section1 {
+    background-size: 115% auto;
+  }
+}
+
 #jumbotronContent {
   margin-top: -2rem;
 }
+
+@media(max-width: 800px) {
+  #jumbotronContent {
+    margin-top: 0;
+  }
+}
+
 #jumbotronContent * {
   text-align: center;
   color: #ffffff;
@@ -89,9 +122,12 @@ body {
 
 #section3 {
   background-color: #eacdc2;
-  padding: 3rem 10rem;
+  padding: 8rem 0 10rem 10rem;
 }
 
+#section3 h2 {
+  font-weight: 900;
+}
 
 #section4 {
   background-image: url(/img/section4-background.jpg);
@@ -110,6 +146,16 @@ body {
   }
 }
 
+#section4 .text {
+  color: #ffffff;
+  text-align: center;
+  padding-top: 5rem;
+}
+
+#section4 .text h2 {
+  font-weight: 900;
+}
+
 #section5Header {
   background-image: url(/img/wave5.svg);
   background-repeat: no-repeat;
@@ -120,6 +166,7 @@ body {
 
 #section5Header h2 {
   float: right;
+  font-weight: 900;
 }
 
 #section5 {
@@ -136,6 +183,37 @@ body {
   font-size: 2rem;
 }
 
-#section5 .waveBottom {
-  fill: #372549;
+#footer {
+  background-color: #774c60;
+  padding: 1rem 3rem 2rem 3rem;
+  display: grid;
+  grid-template-areas: "a b c";
+}
+
+#footer #socialIcons {
+  grid-area: a;
+  align-self: end;
+}
+
+#footer #socialIcons img {
+  width: 2rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+#footer #contactInfo {
+  grid-area: b;
+  align-self: end;
+  justify-self: center;
+  color: #ffffff;
+  text-align: center;
+}
+
+#footer #isekLogoText {
+  grid-area: c;
+  justify-self: end;
+}
+
+#footer #isekLogoText img {
+  width: 15rem;
 }
