@@ -89,7 +89,7 @@ html
             each addon in business.registration.addons
               .form-check
                 input.form-check-input(type='checkbox', name='registration[addons][]' , checked= addon.value, value= addon.name)
-                label.form-check-label= addon.name
+                label.form-check-label= addon.name + (addon.price !== 0 ? ' (' + addon.price + ' kr)' : '' )
       //
         .row.mt-5
           .col

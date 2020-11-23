@@ -28,8 +28,8 @@ const config = {
   },
   businesses: {
     registrationAddons: [
-      '5 kontaktsamtal',
-      'Extra marknadsföring'
+      { name: '5 kontaktsamtal', price: 3000 },
+      { name: 'Extra marknadsföring', price: 3000 }
     ],
     enabledOffers: [
       'Examensarbete',

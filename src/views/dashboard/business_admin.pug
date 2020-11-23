@@ -86,7 +86,7 @@ html
             .form-check
               input.form-check-input(type='checkbox', disabled, checked= addon.value)
               label.form-check-label
-                em= addon.name
+                em= addon.name + (addon.price !== 0 ? ' (' + addon.price + ' kr)' : '' )
     //
       .row.mt-5
         .col

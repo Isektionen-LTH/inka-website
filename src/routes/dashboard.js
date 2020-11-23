@@ -35,8 +35,9 @@ router.get('/', Auth.requireSignedIn, async (req, res) => {
     // Create addons array
     user.registration.addons = config.businesses.registrationAddons.map(a => {
       return {
-        name: a,
-        value: user.registration.addons.includes(a)
+        name: a.name,
+        value: user.registration.addons.includes(a.name),
+        price: a.price
       }
     })
     
@@ -108,8 +109,9 @@ router.get('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
   // Build addons array
   business.registration.addons = config.businesses.registrationAddons.map(a => {
     return {
-      name: a,
-      value: business.registration.addons.includes(a)
+      name: a.name,
+      value: business.registration.addons.includes(a.name),
+      price: a.price
     }
   }) 
 
@@ -196,8 +198,9 @@ router.get('/:business', Auth.requireAdminPrivileges, async (req, res) => {
   // Build addons array
   safeBusiness.registration.addons = config.businesses.registrationAddons.map(a => {
     return {
-      name: a,
-      value: safeBusiness.registration.addons.includes(a)
+      name: a.name,
+      value: safeBusiness.registration.addons.includes(a.name),
+      price: a.price
     }
   })
 
@@ -233,8 +236,9 @@ router.get('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => {
   // Build addons array
   safeBusiness.registration.addons = config.businesses.registrationAddons.map(a => {
     return {
-      name: a,
-      value: safeBusiness.registration.addons.includes(a)
+      name: a.name,
+      value: safeBusiness.registration.addons.includes(a.name),
+      price: a.price
     }
   })
 
