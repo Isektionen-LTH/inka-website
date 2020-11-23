@@ -42,8 +42,8 @@
 
 #navbarLip {
   position: relative;
-  top: 0;
-  left: 0;
+  top: -2px;
+  left: -2px;
   width: 100%;
 }
 
@@ -98,7 +98,7 @@
 #section2 {
   background-color: #B75D69;
   color: #FFFFFF;
-  height: 95vh;
+  min-height: 95vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -118,6 +118,13 @@
   right: 10rem;
   float: right;
   height: 110vh;
+  z-index: 100;
+}
+
+#section2WaveBottom {
+  position: relative;
+  top: 2px;
+  left: 2px;
 }
 
 #section3 {
@@ -181,6 +188,12 @@
   text-align: center;
   padding: 50vh 0;
   font-size: 2rem;
+}
+
+#businessesWaveBottom {
+  position: relative;
+  top: 2px;
+  left: 2px;
 }
 
 #contact {
