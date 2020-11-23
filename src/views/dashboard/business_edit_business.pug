@@ -56,13 +56,21 @@ html
                 h3 Anmälan
             .row.mb-1
               .col
-                .form-check
-                  input.form-check-input(type='checkbox', disabled, checked)
-                  label.form-check-label Baspaket (ingår i grunderbjudandet)
+                label
+                  strong Deltagande
+                select.custom-select(name='registration[participation]')
+                  option(value='physical', selected= business.registration.participation === 'physical') Den fysiska mässan
+                  option(value='digital', selected= business.registration.participation === 'digital') Den digitala mässan
+                  option(value='both', selected= business.registration.participation === 'both') Både den fysiska och digitala mässan
             .row
               .col
                 label
                   strong Tillägg 
+
+                .form-check
+                  input.form-check-input(type='checkbox', disabled, checked)
+                  label.form-check-label Baspaket (ingår i grunderbjudandet)
+
                 each addon in business.registration.addons
                   .form-check
                     input.form-check-input(type='checkbox', name='registration[addons][]' , checked= addon.value, value= addon.name)

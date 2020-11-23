@@ -143,6 +143,7 @@ router.post('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
       orgNumber: ''
     },
     registration: {
+      participation: '',
       addons: []
     },
     info: {
@@ -277,6 +278,7 @@ router.post('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => 
     inka: '',
     nonProfit: false,
     registration: {
+      participation: '',
       addons: []
     },
     info: {

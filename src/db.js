@@ -51,6 +51,7 @@ class DB {
         orgNumber: ''
       },
       registration: {
+        participation: 'physical',
         addons: []
       },
       info: {
