@@ -129,8 +129,8 @@
   font-weight: 900;
 }
 
-#section4 {
-  background-image: url(/img/section4-background.jpg);
+#events {
+  background-image: url(/img/events-background.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -141,35 +141,35 @@
 }
 
 @media(min-aspect-ratio: 16/9) {
-  #section4 {
+  #events {
     background-size: 125% auto;
   }
 }
 
-#section4 .text {
+#events .text {
   color: #ffffff;
   text-align: center;
   padding-top: 5rem;
 }
 
-#section4 .text h2 {
+#events .text h2 {
   font-weight: 900;
 }
 
-#section5Header {
-  background-image: url(/img/section5-wave-top.svg);
+#businessesHeader {
+  background-image: url(/img/businesses-wave-top.svg);
   background-repeat: no-repeat;
   background-size: cover;
   padding: 2rem;
   color: #ffffff;
 }
 
-#section5Header h2 {
+#businessesHeader h2 {
   float: right;
   font-weight: 900;
 }
 
-#section5 {
+#businesses {
   background-color: #b75d69;
   color: #ffffff;
   display: flex;
@@ -177,31 +177,31 @@
   justify-content: space-between;
 }
 
-#section5 h2 {
+#businesses h2 {
   text-align: center;
   padding: 50vh 0;
   font-size: 2rem;
 }
 
-#footer {
+#contact {
   background-color: #774c60;
   padding: 1rem 3rem 2rem 3rem;
   display: grid;
   grid-template-areas: "a b c";
 }
 
-#footer #socialIcons {
+#contact #socialIcons {
   grid-area: a;
   align-self: end;
 }
 
-#footer #socialIcons img {
+#contact #socialIcons img {
   width: 2rem;
   margin-top: 1rem;
   margin-right: 1rem;
 }
 
-#footer #contactInfo {
+#contact #contactInfo {
   grid-area: b;
   align-self: end;
   justify-self: center;
@@ -209,11 +209,11 @@
   text-align: center;
 }
 
-#footer #isekLogoText {
+#contact #isekLogoText {
   grid-area: c;
   justify-self: end;
 }
 
-#footer #isekLogoText img {
+#contact #isekLogoText img {
   width: 15rem;
 }
