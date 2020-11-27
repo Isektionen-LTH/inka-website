@@ -150,7 +150,23 @@ router.post('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
     },
     info: {
       about: '',
-      offers: []
+      offers: [],
+      targets: {
+        y1: false,
+        y2: false,
+        y3: false,
+        y4: false,
+        y5: false
+      },
+      role: '',
+      values: '',
+      didYouKnow: '',
+      social: {
+        website: '',
+        linkedin: '',
+        facebook: '',
+        instagram: ''
+      }
     },
     media: {}
   }
@@ -337,7 +353,24 @@ router.post('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => 
       addons: []
     },
     info: {
-      offers: []
+      about: '',
+      offers: [],
+      targets: {
+        y1: false,
+        y2: false,
+        y3: false,
+        y4: false,
+        y5: false
+      },
+      role: '',
+      values: '',
+      didYouKnow: '',
+      social: {
+        website: '',
+        linkedin: '',
+        facebook: '',
+        instagram: ''
+      }
     },
     media: {}
   }

@@ -93,10 +93,11 @@ html
         .row.mt-5
           .col
             h3 Marknadsföring
+          // TODO Break out title to config and loop through instead
         .row
           .col
             label
-              strong Företagspitch
+              strong Företagspitch (video)
             
             .form-group
               input(type='hidden', name='media[pitch]', value= business.media.pitch ? 'keep' : 'none')
@@ -108,14 +109,44 @@ html
                   a.removeFile(href='#', onclick='removeFile(event)', data-file='pitch', title='Ta bort fil') Ta bort fil
               else 
                 input.form-control-file(type='file', name='pitch')
-      //
         .row
           .col
             label
-              strong Om oss
+              strong Logotyp (SVG,EPS,PNG)
+            
+            .form-group
+              input(type='hidden', name='media[logo]', value= business.media.logo ? 'keep' : 'none')
+
+              if business.media.logo
+                p
+                  a(href='/media/' + business.username + '/' + business.media.logo.name, target='blank')
+                    em= business.media.logo.name
+                  a.removeFile(href='#', onclick='removeFile(event)', data-file='logo', title='Ta bort fil') Ta bort fil
+              else 
+                input.form-control-file(type='file', name='logo')
+        .row
+          .col
+            label
+              strong Poster (PDF,SVG,EPS)
+            
+            .form-group
+              input(type='hidden', name='media[poster]', value= business.media.poster ? 'keep' : 'none')
+
+              if business.media.poster
+                p
+                  a(href='/media/' + business.username + '/' + business.media.poster.name, target='blank')
+                    em= business.media.poster.name
+                  a.removeFile(href='#', onclick='removeFile(event)', data-file='poster', title='Ta bort fil') Ta bort fil
+              else 
+                input.form-control-file(type='file', name='poster')
+        
+        .row.mt-3
+          .col
+            label
+              strong Om oss (50-150 ord)
             div
               textarea(name='info[about]')= business.info.about
-        .row
+        .row.mt-3
           .col
             label
               strong Vi erbjuder
@@ -123,6 +154,67 @@ html
               .form-check
                 input.form-check-input(type='checkbox', checked=offer.value, name='info[offers][]', value= offer.name)
                 label.form-check-label= offer.name
+        .row.mt-3
+          .col
+            label
+              strong Vi riktar in oss mot
+
+            .form-check
+              input.form-check-input(type='checkbox', name= 'info[targets][y1]', checked= business.info.targets.y1)
+              label.form-check-label
+                em Åk 1
+            .form-check
+              input.form-check-input(type='checkbox', name= 'info[targets][y2]', checked= business.info.targets.y2)
+              label.form-check-label
+                em Åk 2
+            .form-check
+              input.form-check-input(type='checkbox', name= 'info[targets][y3]', checked= business.info.targets.y3)
+              label.form-check-label
+                em Åk 3
+            .form-check
+              input.form-check-input(type='checkbox', name= 'info[targets][y4]', checked= business.info.targets.y4)
+              label.form-check-label
+                em Åk 4
+            .form-check
+              input.form-check-input(type='checkbox', name= 'info[targets][y5]', checked= business.info.targets.y5)
+              label.form-check-label
+                em Åk 5 
+        .row.mt-3
+          .col
+            label
+              strong I:ares roll hos oss (50-100 ord)
+            div
+              textarea(name='info[role]')= business.info.role
+        .row
+          .col
+            label
+              strong Vi värdesätter (40-80 ord)
+            div
+              textarea(name='info[values]')= business.info.values
+        .row
+          .col
+            label
+              strong Visste du att (max 50 ord)
+            div
+              textarea(name='info[didYouKnow]')= business.info.didYouKnow
+        .row
+          .col
+            label
+              strong Länkar (inget måste)
+            
+            div
+              label Hemsida
+              input(type='text', placeholder='tex https://isek.se', name='info[social][website]')
+            div
+              label Linkedin
+              input(type='text', placeholder='tex https://www.linkedin.com/company/sektionen-för-industriell-ekonomi/', name='info[social][linkedin]')
+            div
+              label Facebook
+              input(type='text', placeholder='tex https://www.facebook.com/Isektionen', name='info[social][facebook]')
+            div
+              label Instagram
+              input(type='text', placeholder='tex https://www.instagram.com/isektionen_lth', name='info[social][instagram]')
+
 
     include includes/footer.pug
     include includes/scripts.pug

@@ -56,7 +56,23 @@ class DB {
       },
       info: {
         about: '',
-        offers: []
+        offers: [],
+        targets: {
+          y1: false,
+          y2: false,
+          y3: false,
+          y4: false,
+          y5: false
+        },
+        role: '',
+        values: '',
+        didYouKnow: '',
+        social: {
+          website: '',
+          linkedin: '',
+          facebook: '',
+          instagram: ''
+        }
       },
       media: {}
     }

@@ -45,7 +45,9 @@ const config = {
   media: {
     uploadsDir: '/userfiles/',
     allowedFileUploads: [
-      { name: 'pitch', mimes: 'video/*' }
+      { name: 'pitch', mimes: 'video/*' },
+      { name: 'logo', mimes: 'image/svg+xml,image/png,application/postscript,application/eps,application/x-eps,image/eps,image/x-eps' },
+      { name: 'poster', mimes: 'application/pdf,image/svg+xml,application/postscript,application/eps,application/x-eps,image/eps,image/x-eps' }
     ]
   }
 }

@@ -100,12 +100,39 @@ html
             p
               a(href='/media/' + business.username + '/' + business.media.pitch.name, target='blank')
                 em= business.media.pitch.name
-    //
+          else
+            p
+              em Ingen fil uppladdad
       .row
         .col
           label
+            strong Logotyp
+          
+          if business.media.logo
+            p
+              a(href='/media/' + business.username + '/' + business.media.logo.name, target='blank')
+                em= business.media.logo.name
+          else
+            p
+              em Ingen fil uppladdad
+      .row
+        .col
+          label
+            strong Poster
+          
+          if business.media.poster
+            p
+              a(href='/media/' + business.username + '/' + business.media.poster.name, target='blank')
+                em= business.media.poster.name
+          else
+            p
+              em Ingen fil uppladdad
+      .row.mt-3
+        .col
+          label
             strong Om oss
-          p= business.info.about
+          p
+            em= business.info.about
       .row
         .col
           label
@@ -115,6 +142,79 @@ html
               input.form-check-input(type='checkbox', disabled, checked=offer.value)
               label.form-check-label
                 em= offer.name
+      .row.mt-3
+        .col
+          label
+            strong Vi riktar in oss mot
+
+          .form-check
+            input.form-check-input(type='checkbox', disabled, checked= business.info.targets.y1)
+            label.form-check-label
+              em Åk 1
+          .form-check
+            input.form-check-input(type='checkbox', disabled, checked= business.info.targets.y2)
+            label.form-check-label
+              em Åk 2
+          .form-check
+            input.form-check-input(type='checkbox', disabled, checked= business.info.targets.y3)
+            label.form-check-label
+              em Åk 3
+          .form-check
+            input.form-check-input(type='checkbox', disabled, checked= business.info.targets.y4)
+            label.form-check-label
+              em Åk 4
+          .form-check
+            input.form-check-input(type='checkbox', disabled, checked= business.info.targets.y5)
+            label.form-check-label
+              em Åk 5
+      .row.mt-3
+        .col
+          label
+            strong I:ares roll hos oss
+          p
+            em= business.info.role
+      .row
+        .col
+          label
+            strong Vi värdesätter
+          p
+            em= business.info.values
+      .row
+        .col
+          label
+            strong Visste du att
+          p
+            em= business.info.didYouKnow
+      .row
+        .col
+          label
+            strong Länkar
+
+          .row
+            .col-1 Hemsida
+            .col
+              if business.info.social.website
+              a(href= business.info.social.website)
+                em= business.info.social.website
+          .row
+            .col-1 LinkedIn
+            .col
+              if business.info.social.linkedin
+              a(href= business.info.social.linkedin)
+                em= business.info.social.linkedin
+          .row
+            .col-1 Facebook
+            .col
+              if business.info.social.facebook
+              a(href= business.info.social.facebook)
+                em= business.info.social.facebook
+          .row
+            .col-1 Instagram
+            .col
+              if business.info.social.instagram
+              a(href= business.info.social.instagram)
+                em= business.info.social.instagram
+
 
     include includes/footer.pug
     include includes/scripts.pug
