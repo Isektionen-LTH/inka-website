@@ -123,7 +123,17 @@ router.get('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
     }
   }) 
 
-  res.render('dashboard/business_edit_business', { user: business, business })
+  // Build mimes object
+  const mimes = {}
+  config.media.allowedFileUploads.forEach(file => {
+    mimes[file.name] = file.mimes
+  })
+
+  res.render('dashboard/business_edit_business', { 
+    user: business, 
+    business,
+    mimes
+  })
 })
 
 /**
@@ -315,11 +325,17 @@ router.get('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => {
     }
   })
 
+  // Build mimes object
+  const mimes = {}
+  config.media.allowedFileUploads.forEach(file => {
+    mimes[file.name] = file.mimes
+  })
 
   res.render('dashboard/business_admin_edit', {
     user,
     business,
-    admins
+    admins,
+    mimes
   })
 })
 

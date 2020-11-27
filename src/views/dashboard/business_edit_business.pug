@@ -90,9 +90,9 @@ html
                     p
                       a(href='/media/' + business.username + '/' + business.media.pitch.name, target='blank')
                         em= business.media.pitch.name
-                      a.removeFile(href='#', onclick='removeFile(event)', data-file='pitch', title='Ta bort fil') Ta bort fil
+                      a.removeFile(href='#', onclick='removeFile(event)', data-file='pitch', data-accept-mimes= mimes.pitch, title='Ta bort fil') Ta bort fil
                   else 
-                    input.form-control-file(type='file', name='pitch')
+                    input.form-control-file(type='file', name='pitch', accept= mimes.pitch)
             .row
               .col
                 label
@@ -105,24 +105,24 @@ html
                     p
                       a(href='/media/' + business.username + '/' + business.media.logo.name, target='blank')
                         em= business.media.logo.name
-                      a.removeFile(href='#', onclick='removeFile(event)', data-file='logo', title='Ta bort fil') Ta bort fil
+                      a.removeFile(href='#', onclick='removeFile(event)', data-file='logo', data-accept-mimes= mimes.logo, title='Ta bort fil') Ta bort fil
                   else 
-                    input.form-control-file(type='file', name='logo')
+                    input.form-control-file(type='file', name='logo', accept= mimes.logo)
             .row
               .col
                 label
                   strong Poster (PDF,SVG,EPS)
 
                 .form-group
-                  input(type='hidden', name='media[poster]', value= business.media.pitch ? 'keep' : 'none')
+                  input(type='hidden', name='media[poster]', value= business.media.poster ? 'keep' : 'none')
 
                   if business.media.poster
                     p
                       a(href='/media/' + business.username + '/' + business.media.poster.name, target='blank')
                         em= business.media.poster.name
-                      a.removeFile(href='#', onclick='removeFile(event)', data-file='poster', title='Ta bort fil') Ta bort fil
+                      a.removeFile(href='#', onclick='removeFile(event)', data-file='poster', data-accept-mimes= mimes.poster, title='Ta bort fil') Ta bort fil
                   else 
-                    input.form-control-file(type='file', name='poster')
+                    input.form-control-file(type='file', name='poster', accept= mimes.poster)
             .row.mt-3
               .col
                 label

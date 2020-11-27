@@ -2,6 +2,7 @@ function removeFile(event) {
     event.preventDefault()
     
     const file = event.target.dataset.file
+    const acceptMimes = event.target.dataset.acceptMimes
 
     const hiddenInput = document.querySelector(`input[type='hidden'][name='media[${file}]']`)
     hiddenInput.value = 'none'
@@ -16,6 +17,7 @@ function removeFile(event) {
     const fileSelectInput = document.createElement('input')
     fileSelectInput.type = 'file'
     fileSelectInput.name = file
+    fileSelectInput.accept = acceptMimes
 
     formGroup.appendChild(fileSelectInput)
 }
