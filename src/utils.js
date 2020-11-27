@@ -118,7 +118,10 @@ class Utils {
    * Check if file mime type is permitted in the "mime mask"
    */
   static checkMime(mime, mask) {
-    const maskRegexes = mask.split(',').map(m => new RegExp(m.replace('/*', '\\/.*')))
+    const maskRegexes = mask.split(',').map(m => {
+      const regexString = m.replace('/*', '\\/.*').replace('+', '\\+')
+      return new RegExp(regexString)
+    })
 
     const ok = maskRegexes.some(m => m.test(mime))
     return ok
