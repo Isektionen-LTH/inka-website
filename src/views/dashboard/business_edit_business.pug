@@ -8,7 +8,7 @@ html
     .container.mt-5
       .row
         .col
-          form(method='post')
+          form(method='post', enctype='multipart/form-data')
             .row
               .col
                 h1= business.name
@@ -75,10 +75,25 @@ html
                   .form-check
                     input.form-check-input(type='checkbox', name='registration[addons][]' , checked= addon.value, value= addon.name)
                     label.form-check-label= addon.name + (addon.price !== 0 ? ' (' + addon.price + ' kr)' : '' )
-          //
             .row.mt-5
               .col
                 h3 Marknadsföringsinformation
+            .row
+              .col
+                label
+                  strong Företagspitch
+
+                .form-group
+                  input(type='hidden', name='media[pitch]', value= business.media.pitch ? 'keep' : 'none')
+
+                  if business.media.pitch
+                    p
+                      a(href='/media/' + business.username + '/' + business.media.pitch.name, target='blank')
+                        em= business.media.pitch.name
+                      a.removeFile(href='#', onclick='removeFile(event)', data-file='pitch', title='Ta bort fil') Ta bort fil
+                  else 
+                    input.form-control-file(type='file', name='pitch')
+          //
             .row
               .col
                 label
@@ -100,3 +115,4 @@ html
 
     include includes/footer.pug
     include includes/scripts.pug
+    script(src='/js/dashboard/fileUtils.js')

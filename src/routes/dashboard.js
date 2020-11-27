@@ -151,22 +151,71 @@ router.post('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
     info: {
       about: '',
       offers: []
-    }
+    },
+    media: {}
   }
 
   // Sanitize input
-  const rawData = req.body
-  if (!Utils.isSubset(rawData, businessEditDefaults)) {
-    res.status(400).send()
-    return
-  }
+  const rawData = Utils.parseMultipartObject(req.body)
+  
+  //if (!Utils.isSubset(rawData, businessEditDefaults)) {
+  //  res.status(400).send()
+  //  return
+  //}
 
   // Merge the body with defaults to provide defaults for empty arrays
   const data = Utils.mergeDeep(businessEditDefaults, rawData)
 
   const business = await DB.findUser(req.session.username)
   const merged = Utils.mergeDeep(business, data)
-  
+
+  // TODO Extract duplicated code into helper function
+  // Check file uploads
+  let tempMedia = {}
+  const handleFilesAsync = config.media.allowedFileUploads.map( async allowedFile => {
+    if (data.media[allowedFile.name] === 'none') {
+      if (req.files && req.files[allowedFile.name]) {
+        // Check if uploaded file is ok
+        const uploadedFile = req.files[allowedFile.name];
+        if (!Utils.checkMime(uploadedFile.mimetype, allowedFile.mimes)) {
+          throw new Error('File type not allowed: ' + uploadedFile.mimetype)
+        }
+
+        // Remove existing file
+        if (business.media[allowedFile.name]) {
+          const filePath = config.media.uploadsDir + business.username + '/' + business.media[allowedFile.name].name
+          await Utils.unlinkFile(filePath)
+        }
+
+        // Move file to permanent storage
+        const fileName = allowedFile.name + '.' + uploadedFile.name.split('.').pop()
+        const mvTarget = config.media.uploadsDir + business.username + '/' + fileName
+        await uploadedFile.mv(mvTarget)
+
+        tempMedia[allowedFile.name] = { name: fileName, mime: uploadedFile.mimetype }
+      }
+      else {
+        // Remove file if exists
+        if (business.media[allowedFile.name]) {
+          const filePath = config.media.uploadsDir + business.username + '/' + business.media[allowedFile.name].name
+          await Utils.unlinkFile(filePath)
+        }
+      }
+    }
+    else if (data.media[allowedFile.name] === 'keep') {
+      tempMedia[allowedFile.name] = business[allowedFile.name]
+    }
+  })
+
+  // Wait for all files to be handled
+  try {
+    await Promise.all(handleFilesAsync)
+  } catch (error) {
+    console.error(error)
+    res.status(500).send()
+    return
+  }
+  merged.media = tempMedia
 
   await DB.updateUser(req.session.username, merged)
   
@@ -211,6 +260,8 @@ router.get('/:business', Auth.requireAdminPrivileges, async (req, res) => {
       value: safeBusiness.info.offers.includes(o)
     }
   })
+
+  console.log(business)
 
   res.render('dashboard/business_admin', {
     user,
@@ -287,11 +338,12 @@ router.post('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => 
     },
     info: {
       offers: []
-    }
+    },
+    media: {}
   }
 
   // Sanitize input
-  const rawData = req.body
+  const rawData = Utils.parseMultipartObject(req.body)
   //if (!Utils.isSubset(rawData, adminEditDefaults)) {
   //  res.status(400).send()
   //  return
@@ -302,9 +354,56 @@ router.post('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => 
   data.nonProfit = data.nonProfit == 'true'
 
   const business = await DB.findUser(req.params.business)
+  // TODO Probably do file check here
   const merged = Utils.mergeDeep(business, data)
-  
 
+  // Check file uploads
+  let tempMedia = {}
+  const handleFilesAsync = config.media.allowedFileUploads.map( async allowedFile => {
+    if (data.media[allowedFile.name] === 'none') {
+      if (req.files && req.files[allowedFile.name]) {
+        // Check if uploaded file is ok
+        const uploadedFile = req.files[allowedFile.name];
+        if (!Utils.checkMime(uploadedFile.mimetype, allowedFile.mimes)) {
+          throw new Error('File type not allowed: ' + uploadedFile.mimetype)
+        }
+
+        // Remove existing file
+        if (business.media[allowedFile.name]) {
+          const filePath = config.media.uploadsDir + business.username + '/' + business.media[allowedFile.name].name
+          await Utils.unlinkFile(filePath)
+        }
+
+        // Move file to permanent storage
+        const fileName = allowedFile.name + '.' + uploadedFile.name.split('.').pop()
+        const mvTarget = config.media.uploadsDir + business.username + '/' + fileName
+        await uploadedFile.mv(mvTarget)
+
+        tempMedia[allowedFile.name] = { name: fileName, mime: uploadedFile.mimetype }
+      }
+      else {
+        // Remove file if exists
+        if (business.media[allowedFile.name]) {
+          const filePath = config.media.uploadsDir + business.username + '/' + business.media[allowedFile.name].name
+          await Utils.unlinkFile(filePath)
+        }
+      }
+    }
+    else if (data.media[allowedFile.name] === 'keep') {
+      tempMedia[allowedFile.name] = business[allowedFile.name]
+    }
+  })
+
+  // Wait for all files to be handled
+  try {
+    await Promise.all(handleFilesAsync)
+  } catch (error) {
+    console.error(error)
+    res.status(500).send()
+    return
+  }
+  merged.media = tempMedia
+  
   await DB.updateUser(req.params.business, merged)
   
   res.redirect('/dashboard/' + req.params.business)

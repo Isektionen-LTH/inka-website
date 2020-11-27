@@ -17,6 +17,7 @@ services:
             - db
         volumes:
             - ./src:/app/src:ro
+            - ./userfiles:/userfiles
         environment:
             - NODE_ENV=production
         env_file: 

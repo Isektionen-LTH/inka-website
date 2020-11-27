@@ -1,0 +1,7 @@
+@import 'includes/navbar.css';
+
+.removeFile, .removeFile:hover, .removeFile:visited {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: #fa3434;
+}

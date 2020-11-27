@@ -87,10 +87,19 @@ html
                   input.form-check-input(type='checkbox', disabled, checked= addon.value)
                   label.form-check-label
                     em= addon.name + (addon.price !== 0 ? ' (' + addon.price + ' kr)' : '' )
-        //
           .row.mt-5
             .col
               h3 Marknadsföringsinformation
+          .row
+            .col
+              label
+                strong Företagspitch
+              
+              if business.media.pitch
+                p
+                  a(href='/media/' + business.username + '/' + business.media.pitch.name, target='blank')
+                    em= business.media.pitch.name
+        //
           .row
             .col
               label

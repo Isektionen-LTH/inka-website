@@ -57,7 +57,8 @@ class DB {
       info: {
         about: '',
         offers: []
-      }
+      },
+      media: {}
     }
 
     const business = Utils.mergeDeep(createBusinessDefault, businessFields)

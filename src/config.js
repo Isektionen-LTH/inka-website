@@ -41,6 +41,12 @@ const config = {
       'Traineeprogram',
       'Utlandsmöjligheter'
     ]
+  },
+  media: {
+    uploadsDir: '/userfiles/',
+    allowedFileUploads: [
+      { name: 'pitch', mimes: 'video/*' }
+    ]
   }
 }
 

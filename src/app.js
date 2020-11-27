@@ -1,5 +1,6 @@
 const fs = require('fs')
 const express = require('express')
+const fileUpload = require('express-fileupload')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const bodyParser = require('body-parser')
@@ -14,6 +15,13 @@ const app = express()
 
 
 // Config
+app.use(fileUpload({
+  limits: { fileSize: 200 * 1024 * 1024 }, // 200 MiB
+  useTempFiles: true,
+  tempFileDir: '/tmp/',
+  createParentPath: true
+}))
+
 const publicDir = 'src/public' // The public directory
 let sessionConfig = {
   store: new MongoStore({ url: config.db.connectionString, mongoOptions: config.db.connectionOptions }),
@@ -49,6 +57,7 @@ app.use(function(req, res, next) { // Allow html files to be accessed without ex
     next()
 });
 app.use(express.static(publicDir)) // Serve static content from 'public' directory
+app.use('/media', express.static(config.media.uploadsDir)) // Serve uploaded files on a specific prefix
 app.set('view engine', 'pug') // Set the view/template engine
 app.set('views', 'src/views') // Set the views directory
 
