@@ -219,7 +219,7 @@ router.post('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
       }
     }
     else if (data.media[allowedFile.name] === 'keep') {
-      tempMedia[allowedFile.name] = business[allowedFile.name]
+      tempMedia[allowedFile.name] = business.media[allowedFile.name]
     }
   })
 
@@ -421,7 +421,7 @@ router.post('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => 
       }
     }
     else if (data.media[allowedFile.name] === 'keep') {
-      tempMedia[allowedFile.name] = business[allowedFile.name]
+      tempMedia[allowedFile.name] = business.media[allowedFile.name]
     }
   })
 
