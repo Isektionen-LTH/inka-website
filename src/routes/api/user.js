@@ -74,8 +74,6 @@ router.post('/changePassword', async (req, res) => {
 
       if (user && await Auth.validatePassword(user.password, oldPassword)) {
         const passwordHash = await Auth.hashPassword(newPassword)
-        console.log(user.password)
-        console.log(passwordHash)
         // Set password by username and old password
         await DB.setPasswordByUsername(user.username, passwordHash)
         res.status(204).send()

@@ -277,8 +277,6 @@ router.get('/:business', Auth.requireAdminPrivileges, async (req, res) => {
     }
   })
 
-  console.log(business)
-
   res.render('dashboard/business_admin', {
     user,
     business
