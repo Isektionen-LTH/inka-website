@@ -9,29 +9,28 @@ html
       form(method='post', enctype='multipart/form-data')
         .row
           .col
-            h1
-              input(type='text', placeholder='Visningsnamn', name='name', value=business.name)
+            input.form-control.mb-1(type='text', placeholder='Visningsnamn', name='name', value=business.name)
             h6.text-monospace.text-secondary= business.username
           .col-2
             input.btn.btn-primary(type='submit', value='Spara')
-        .row(style='margin-top: 24px;')
+        .row.mt-5
           .col
             label
               strong Kontaktperson på företaget
-            div
-              input(type='text', name='contact[name]', placeholder='Namn på kontaktperson', value=business.contact.name, required)
-            div
-              input(type='email', name='contact[email]', placeholder='Epost till kontaktperson', value=business.contact.email, required)
+            .form-group
+              input.form-control(type='text', name='contact[name]', placeholder='Namn på kontaktperson', value=business.contact.name, required)
+            .form-group
+              input.form-control(type='email', name='contact[email]', placeholder='Epost till kontaktperson', value=business.contact.email, required)
             label
               strong Kontaktperson i INKA
-            div
-              select(name='inka')
+            .form-group
+              select.form-control(name='inka')
                 each admin in admins
                   option(value=admin.username, selected= business.inka.username === admin.username)= admin.name
             label
               strong Non-profit
-            div
-              select(name='nonProfit')
+            .form-group
+              select.form-control(name='nonProfit')
                 option(value='false', selected= !business.nonProfit) Nej
                 option(value='true', selected= business.nonProfit) Ja
         .row.mt-5
@@ -41,31 +40,31 @@ html
           .col
             label
               strong Avtalstecknare
-            .row
-              .col-1 Namn:
-              .col
-                input(type='text', name='billing[signer][name]', value= business.billing.signer.name)
-            .row
-              .col-1 Email:
-              .col
-                input(type='email', name='billing[signer][email]', value= business.billing.signer.email)
-            .row
-              .col-1 Tel:
-              .col
-                input(type='text', name='billing[signer][phone]', value= business.billing.signer.phone)
-              p
-        .row
+
+            .input-group
+              .input-group-prepend
+                span.input-group-text Namn
+              input.form-control(type='text', name='billing[signer][name]', value= business.billing.signer.name)
+            .input-group.mt-2
+              .input-group-prepend
+                span.input-group-text Email
+              input.form-control(type='email', name='billing[signer][email]', value= business.billing.signer.email)
+            .input-group.mt-2
+              .input-group-prepend
+                span.input-group-text Tel
+              input.form-control(type='text', name='billing[signer][phone]', value= business.billing.signer.phone)
+        .row.mt-3
           .col
             label
               strong Företagsadress
-            div
-              input(type='text', name='billing[address]', value= business.billing.address)
+            .form-group
+              input.form-control(type='text', name='billing[address]', value= business.billing.address)
         .row
           .col
             label
               strong Organisationsnummer
-            div
-              input(type='text', name='billing[orgNumber]', value= business.billing.orgNumber)
+            .form-group
+              input.form-control(type='text', name='billing[orgNumber]', value= business.billing.orgNumber)
         .row.mt-5
           .col
             h3 Anmälan
@@ -73,10 +72,11 @@ html
           .col
             label
               strong Deltagande
-            select(name='registration[participation]')
-              option(value='physical', selected= business.registration.participation === 'physical') Den fysiska mässan
-              option(value='digital', selected= business.registration.participation === 'digital') Den digitala mässan
-              option(value='both', selected= business.registration.participation === 'both') Både den fysiska och digitala mässan
+            .form-group
+              select.form-control(name='registration[participation]')
+                option(value='physical', selected= business.registration.participation === 'physical') Den fysiska mässan
+                option(value='digital', selected= business.registration.participation === 'digital') Den digitala mässan
+                option(value='both', selected= business.registration.participation === 'both') Både den fysiska och digitala mässan
         .row
           .col
             label
@@ -144,8 +144,8 @@ html
           .col
             label
               strong Om oss (50-150 ord)
-            div
-              textarea(name='info[about]')= business.info.about
+            .form-group
+              textarea.form-control(name='info[about]')= business.info.about
         .row.mt-3
           .col
             label
@@ -183,37 +183,37 @@ html
           .col
             label
               strong I:ares roll hos oss (50-100 ord)
-            div
-              textarea(name='info[role]')= business.info.role
+            .form-group
+              textarea.form-control(name='info[role]')= business.info.role
         .row
           .col
             label
               strong Vi värdesätter (40-80 ord)
-            div
-              textarea(name='info[values]')= business.info.values
+            .form-group
+              textarea.form-control(name='info[values]')= business.info.values
         .row
           .col
             label
               strong Visste du att (max 50 ord)
-            div
-              textarea(name='info[didYouKnow]')= business.info.didYouKnow
+            .form-group
+              textarea.form-control(name='info[didYouKnow]')= business.info.didYouKnow
         .row
           .col
             label
               strong Länkar (inget måste)
             
-            div
+            .form-group
               label Hemsida
-              input(type='text', placeholder='tex https://isek.se', name='info[social][website]')
-            div
+              input.form-control(type='text', placeholder='tex https://isek.se', name='info[social][website]')
+            .form-group
               label Linkedin
-              input(type='text', placeholder='tex https://www.linkedin.com/company/sektionen-för-industriell-ekonomi/', name='info[social][linkedin]')
-            div
+              input.form-control(type='text', placeholder='tex https://www.linkedin.com/company/sektionen-för-industriell-ekonomi/', name='info[social][linkedin]')
+            .form-group
               label Facebook
-              input(type='text', placeholder='tex https://www.facebook.com/Isektionen', name='info[social][facebook]')
-            div
+              input.form-control(type='text', placeholder='tex https://www.facebook.com/Isektionen', name='info[social][facebook]')
+            .form-group
               label Instagram
-              input(type='text', placeholder='tex https://www.instagram.com/isektionen_lth', name='info[social][instagram]')
+              input.form-control(type='text', placeholder='tex https://www.instagram.com/isektionen_lth', name='info[social][instagram]')
 
 
     include includes/footer.pug
