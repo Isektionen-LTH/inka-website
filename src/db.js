@@ -30,6 +30,29 @@ class DB {
     return user
   }
 
+  /**
+   * Find a business and only get the public information
+   */
+  static async findPublicBusiness(business) {
+    const client = await this.configuredClient()
+    const db = client.db(config.db.databaseName)
+    const users = db.collection(userCollection)
+
+    const cursor = users.find({ username: business }).project({
+      _id: 0,
+      name: 1,
+      'info.about': 1,
+      'info.values': 1,
+      'info.offers': 1,
+      'info.social': 1
+    }).limit(1)
+    const user = await cursor.hasNext() ? await cursor.next() : null
+
+    await client.close()
+
+    return user
+  }
+
   static async createBusiness(businessFields) {
     const client = await this.configuredClient()
     const db = client.db(config.db.databaseName)

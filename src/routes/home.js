@@ -6,19 +6,14 @@ const Mailer = require('../mailer')
 
 const routes = express.Router()
 
-routes.get('/', (req, res) => {
-  res.render('index')
+routes.get('/', async (req, res) => {
+  const businesses = await DB.getBusinesses()
+  res.render('index', { businesses })
 })
 
 routes.get('/login', (req, res) => {
   if (Auth.signedInUser(req)) {
-    if (req.session.type === 'admin' || req.session.type === 'business') {
-      res.redirect('/dashboard')
-      return
-    }
-    else {
-      // TODO Redirect to app
-    }
+    res.redirect('/dashboard')
   }
   res.render('login')
 })

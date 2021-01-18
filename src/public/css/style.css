@@ -184,10 +184,63 @@
   justify-content: space-between;
 }
 
-#businesses h2 {
-  text-align: center;
-  padding: 50vh 0;
-  font-size: 2rem;
+#businesses .container {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.business-thumbnail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.business-thumbnail:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#businessInfoModal .modal-content {
+  color: #707070;
+}
+
+#businessInfoModal .modal-header {
+  border: none;
+  background-color: #F0CCC0;
+}
+
+#businessInfoModal .modal-title {
+  font-weight: 900;
+}
+
+#businessInfoModal .modal-body {
+  background-color: #F0CCC0;
+}
+
+#businessInfoModal .modal-body h5 {
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+#businessInfoModal .wave-bottom {
+  background-color: #C45667;
+}
+
+#businessInfoModal .modal-footer {
+  background-color: #C45667;
+  border: none;
+}
+
+#businessInfoModal .modal-footer a {
+  padding: 1rem 0.7rem;
+}
+
+#businessInfoModal .modal-footer a:first-child {
+  padding-left: 1.5rem;
+}
+
+#businessInfoModal .modal-footer a img {
+  width: 1.5rem;
 }
 
 #businessesWaveBottom {

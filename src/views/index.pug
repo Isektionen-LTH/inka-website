@@ -1,67 +1,115 @@
 doctype html
-html
+html(lang='sv')
   head
     meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap' rel='stylesheet' crossorigin='anonymous')
+    link(rel='stylesheet' href='/css/style.css')
+    link(rel='shortcut icon' href='favicon.ico')
+
     title INKA 2021
-    // Bootstrap core CSS
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css')
-    style.
-      /*
-      * Globals
-      */
-      /* Links */
-      a,
-      a:focus,
-      a:hover {
-      color: #fff;
-      }
-      /* Custom default button */
-      .btn-secondary,
-      .btn-secondary:hover,
-      .btn-secondary:focus {
-      color: #541824;
-      text-shadow: none;
-      /* Prevent inheritance from `body` */
-      background-color: #fff;
-      border: .05rem solid #fff;
-      }
-      /*
-      * Base structure
-      */
-      html,
-      body {
-      height: 100%;
-      background-color: #541824;
-      }
-      body {
-      display: -ms-flexbox;
-      display: flex;
-      color: #fff;
-      text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-      box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
-      }
-      .cover-container {
-      max-width: 42em;
-      justify-content: center;
-      }
-      /*
-      * Cover
-      */
-      .cover {
-      padding: 0 1.5rem;
-      }
-  body.text-center
-    .cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column
-      main.inner.cover(role='main')
-        h1.cover-heading INKA 2021
-        p.lead
-          | Här håller vi på att bygga den nya sidan för I-sektionen på LTHs arbetsmarknadsmässa, 
-          | om du letar efter inloggningssidan hittar du den 
-          a.btn-link(href='/login') här
-          | . 
+
+  body
+    img#navbarLogo(src='/img/navbar-logo.svg')
+    nav#navbar.navbar.navbar-expand-lg.navbar-dark
+      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent')
+        span.navbar-toggler-icon
+      #navbarSupportedContent.collapse.navbar-collapse
+        ul.navbar-nav
+          li.nav-item.mr-4.active
+            a.nav-link(href='#businesses') Företag
+          li.nav-item.mr-4.active
+            a.nav-link(href='#events') Event
+          li.nav-item.mr-4.active
+            a.nav-link(href='#contact') Kontakt
+    #section1
+      img#navbarLip(src='/img/navbar-lip.svg')
+      #jumbotronContent
+        h3 INKA ARBETSMARKNADSMÄSSA
+        h1 25-29 JANUARI, 2021
+    #section2
+      .row
+        .col.col-lg-6.text.pr-lg-0
+          h2 Vad är Inka?
+          p
+            | INKAmässan är sektionens årliga arbetsmarknadsdagar som anordnas i slutet på januari varje år. Syftet är att studenter på sektionen för Industriell ekonomi och intressanta arbetsgivare ska möta varandra. Dessa möten sker i olika format. Under själva mässdagen för studenter mingla runt med företagsrepresentanter från olika företag och under INKA-veckan anordnas också lunchföreläsningar, casetävlingar, kontaktsamtal och en mingelmorgon. För att förbereda och inspirera studenterna hålls Pre-INKA i december. Det hela brukar avslutas med en pampig bankett!
+        .col.d-none.d-lg-block.image
+          img#featherImage(src='/img/feather.svg')
+      #section2WaveBottom
+        img(src='/img/section2-wave-bottom.svg')
+    #section3
+      .row
+        .col-8.text
+          h2 En säkrare mässupplevelse
+          p För projektgruppen har det varit centralt att anpassa INKA till rådande restriktioner, samtidigt som vi har lagt stort fokus på att våra event ska uppfylla samma stora värde för såväl studenter som företag. I nuläget talar det mesta för att INKA kommer att anordnas helt digitalt i januari, men om situationen tillåter kommer vi vara flexibla och vill gärna anordna mindre fysiska event om detta kan göras på ett säkert sätt. Det känns såklart tråkigt att inte kunna välkomna företag till en fysisk mössa i Lund, men vi är glada att kunna presentera ett minst lika bra digitalt upplägg där fokus ligger på att möjliggöra kontakt mellan företag och studenter och skapa sammanhang för samtal, diskussioner och inspiration.
+          p Sammanfattningsvis är vi alltså ödmjuka inför de utmaningar som den rådande situationen innebär men vi är samtidigt övertygade om att INKA kommer leverera samma goda studentkontakt som tidigare år. Hoppas att vi ses på INKA 2021!
+    #events
+      .row
+        .col.text
+          h2 Event för alla
+      #businessesHeader
+        h2 Företag &amp; sponsorer
+    #businesses
+      .container
+        .row
+          each business in businesses
+            if business.media && business.media.logo
+              .col-3.business-thumbnail.p-3(onclick= `showBusiness('${business.username}')`)
+                img.img-fluid(src= `/media/${business.username}/${business.media.logo.name}`, alt= business.name)
+      
+      #businessInfoModal.modal(tabindex='-1')
+        .modal-dialog.modal-lg
+          .modal-content
+            .modal-header
+              h4#businessName.modal-title
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden= 'true') &times;
+            .modal-body
+              .container-fluid
+                .row
+                  .col
+                    h5 Om oss
+                    p#businessAbout
+                  .col
+                    h5 Vi värdesätter
+                    p#businessValues
+                    h5 Vi erbjuder
+                    p#businessOffers
+            img.wave-bottom(src='/img/business-info-modal-wave.svg')
+            .modal-footer
+              .container-fluid
+                .row
+                  a#businessWebsiteLink
+                    img(src='/img/social-website-dark.svg')
+                  a#businessLinkedinLink
+                    img(src='/img/social-linkedin-dark.svg')
+                  a#businessFacebookLink
+                    img(src='/img/social-facebook-dark.svg')
+                  a#businessInstagramLink
+                    img(src='/img/social-instagram-dark.svg')
+
+      #businessesWaveBottom
+        img(src='/img/businesses-wave-bottom.svg')
+    #contact
+      #socialIcons
+        a(href='https://www.linkedin.com/company/sektionen-f%C3%B6r-industriell-ekonomi/')
+          img(src='/img/social-linkedin.svg')
+        a(href='https://www.facebook.com/Isektionen')
+          img(src='/img/social-facebook.svg')
+        a(href='https://www.instagram.com/inkamassan')
+          img(src='/img/social-instagram.svg')
+      #contactInfo
+        p
+          | Naturvetarvägen 14, 223 62 Lund
           br
-          br
-          |  Om du vill komma i kontakt med årets projektledare kan du skicka ett mail till 
-          a(href='mailto:inka@isek.se') inka@isek.se
-          |  eller ringa +46 (0)70-293 81 42
+          | inka@isek.se
+      #isekLogoText
+        img(src='/img/footer-isek-logo.svg')
+
+    // jQuery, Popper.js, and Bootstrap JS
+    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js' integrity='sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s' crossorigin='anonymous')
+    script(src='/js/main.js')
