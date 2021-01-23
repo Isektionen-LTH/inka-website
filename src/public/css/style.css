@@ -1,5 +1,5 @@
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 #navbar {
@@ -202,19 +202,28 @@
 
 #businessInfoModal .modal-content {
   color: #707070;
+  background-color: transparent;
 }
 
 #businessInfoModal .modal-header {
   border: none;
   background-color: #F0CCC0;
+  border-top-left-radius: 0.8rem;
+  border-top-right-radius: 0.8rem;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  padding-right: 2rem;
 }
 
 #businessInfoModal .modal-title {
   font-weight: 900;
+  padding-left: 15px;
 }
 
 #businessInfoModal .modal-body {
   background-color: #F0CCC0;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 #businessInfoModal .modal-body h5 {
@@ -229,6 +238,8 @@
 #businessInfoModal .modal-footer {
   background-color: #C45667;
   border: none;
+  border-bottom-left-radius: 0.8rem;
+  border-bottom-right-radius: 0.8rem;
 }
 
 #businessInfoModal .modal-footer a {
@@ -273,6 +284,10 @@
   justify-self: center;
   color: #ffffff;
   text-align: center;
+}
+
+#contact #contactInfo a {
+  color: #ffffff;
 }
 
 #contact #isekLogoText {

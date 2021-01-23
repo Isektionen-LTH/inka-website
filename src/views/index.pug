@@ -5,7 +5,8 @@ html(lang='sv')
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
 
     link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous')
-    link(href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap' rel='stylesheet' crossorigin='anonymous')
+    link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;900&display=swap', crossorigin='anonymous')
     link(rel='stylesheet' href='/css/style.css')
     link(rel='shortcut icon' href='favicon.ico')
 
@@ -33,8 +34,7 @@ html(lang='sv')
       .row
         .col.col-lg-6.text.pr-lg-0
           h2 Vad är Inka?
-          p
-            | INKAmässan är sektionens årliga arbetsmarknadsdagar som anordnas i slutet på januari varje år. Syftet är att studenter på sektionen för Industriell ekonomi och intressanta arbetsgivare ska möta varandra. Dessa möten sker i olika format. Under själva mässdagen för studenter mingla runt med företagsrepresentanter från olika företag och under INKA-veckan anordnas också lunchföreläsningar, casetävlingar, kontaktsamtal och en mingelmorgon. För att förbereda och inspirera studenterna hålls Pre-INKA i december. Det hela brukar avslutas med en pampig bankett!
+          p INKAmässan är sektionens årliga arbetsmarknadsdagar som anordnas i slutet på januari varje år. Syftet är att studenter på sektionen för Industriell ekonomi och intressanta arbetsgivare ska möta varandra. Dessa möten sker i olika format. Under själva mässdagen för studenter mingla runt med företagsrepresentanter från olika företag och under INKA-veckan anordnas också lunchföreläsningar, casetävlingar, kontaktsamtal och en mingelmorgon. För att förbereda och inspirera studenterna hålls Pre-INKA i december. Det hela brukar avslutas med en pampig bankett!
         .col.d-none.d-lg-block.image
           img#featherImage(src='/img/feather.svg')
       #section2WaveBottom
@@ -43,12 +43,17 @@ html(lang='sv')
       .row
         .col-8.text
           h2 En säkrare mässupplevelse
-          p För projektgruppen har det varit centralt att anpassa INKA till rådande restriktioner, samtidigt som vi har lagt stort fokus på att våra event ska uppfylla samma stora värde för såväl studenter som företag. I nuläget talar det mesta för att INKA kommer att anordnas helt digitalt i januari, men om situationen tillåter kommer vi vara flexibla och vill gärna anordna mindre fysiska event om detta kan göras på ett säkert sätt. Det känns såklart tråkigt att inte kunna välkomna företag till en fysisk mössa i Lund, men vi är glada att kunna presentera ett minst lika bra digitalt upplägg där fokus ligger på att möjliggöra kontakt mellan företag och studenter och skapa sammanhang för samtal, diskussioner och inspiration.
-          p Sammanfattningsvis är vi alltså ödmjuka inför de utmaningar som den rådande situationen innebär men vi är samtidigt övertygade om att INKA kommer leverera samma goda studentkontakt som tidigare år. Hoppas att vi ses på INKA 2021!
+          p Coronapandemin har för oss, som alla andra, inneburit stora omställningar. Resan har varit utmanande, men med restriktioner kom också behov av nytänkande och kreativitet vilket vi ser som något väldigt positivt! På onlineevent behövs inga platsbegränsningar vilket har möjliggjort att alla som velat har fått lyssna på spännande lunchföreläsningar. Företagspitchen har flyttats till Instagram så studenterna har kunnat bekanta sig med företagen i god tid innan mässan. Momentet kontaktsamtal har blivit en än viktigare del av INKA, och söktrycket har varit rekordstort! Även årets INKA är späckat med event - case, mingelmorgon, inspirationsföreläsningar, mässa och kontaktsamtal. Vi är otroligt glada för peppen från er företag och engagemanget från er studenter. 
+          p Vi tror att INKAs funktion som plattform för möte, samtal och diskussion mellan studenter och företag är viktigare än någonsin. Tillsammans ser vi fram emot att genomföra en helt digital mässa, som vi tror kommer uppfylla INKAs syfte lika bra som tidigare mässor, om inte ännu bättre!
+
     #events
       .row
         .col.text
           h2 Event för alla
+      .container
+        .row
+          .col
+            img.img-fluid.d-none.d-md-block(src='/img/timeline.svg')
       #businessesHeader
         h2 Företag &amp; sponsorer
     #businesses
@@ -56,7 +61,7 @@ html(lang='sv')
         .row
           each business in businesses
             if business.media && business.media.logo
-              .col-3.business-thumbnail.p-3(onclick= `showBusiness('${business.username}')`)
+              .col-4.business-thumbnail.p-2.mb-4(onclick= `showBusiness('${business.username}')`)
                 img.img-fluid(src= `/media/${business.username}/${business.media.logo.name}`, alt= business.name)
       
       #businessInfoModal.modal(tabindex='-1')
@@ -104,9 +109,10 @@ html(lang='sv')
         p
           | Naturvetarvägen 14, 223 62 Lund
           br
-          | inka@isek.se
+          a(href='mailto:inka@isek.se') inka@isek.se
       #isekLogoText
-        img(src='/img/footer-isek-logo.svg')
+        a(href='https://isek.se')
+          img(src='/img/footer-isek-logo.svg')
 
     // jQuery, Popper.js, and Bootstrap JS
     script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
