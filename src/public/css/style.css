@@ -2,6 +2,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 #navbar {
   background-color: #b75d69;
 }
