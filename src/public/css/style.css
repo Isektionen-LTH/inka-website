@@ -21,12 +21,15 @@
 
 @media(max-width: 1300px) {
   #navbarLogo {
-    width: 8rem;
+    top: 1.5rem;
+    left: 4rem;
+    width: 7rem;
   }
 }
 
 @media(max-width: 900px) {
   #navbarLogo {
+    top: 1.5rem;
     left: 3rem;
     width: 5rem;
   }
