@@ -42,7 +42,7 @@ class DB {
       _id: 0,
       name: 1,
       'info.about': 1,
-      'info.values': 1,
+      'info.role': 1,
       'info.offers': 1,
       'info.social': 1
     }).limit(1)

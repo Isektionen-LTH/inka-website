@@ -28,7 +28,7 @@ async function showBusiness(business) {
     // Business text info
     document.getElementById('businessName').textContent = businessObject.name
     document.getElementById('businessAbout').textContent = businessObject.info.about
-    document.getElementById('businessValues').textContent = businessObject.info.values
+    document.getElementById('businessRole').textContent = businessObject.info.role
     document.getElementById('businessOffers').innerHTML = businessObject.info.offers.map(o => '<li>' + o + '</li>').join('')
 
     // Social links
