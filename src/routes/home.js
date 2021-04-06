@@ -15,20 +15,16 @@ routes.get('/login', (req, res) => {
   if (Auth.signedInUser(req)) {
     res.redirect('/dashboard')
   }
-  res.render('login')
+  else {
+    res.render('login')
+  }
 })
 
 routes.post('/login', async (req, res) => {
+  // Redirect if user is already signed in
   if (Auth.signedInUser(req)) {
-    const userType = req.session.type
-
-    if (userType === 'admin' || userType === 'business') {
-      res.redirect('/dashboard')
-    }
-    else {
-      // TODO Maybe redirect 'student' to the app later
-      res.status(400).send('User is already signed in')
-    }
+    res.redirect('/dashboard')
+    return
   }
 
   const { username, password } = req.body
@@ -43,12 +39,6 @@ routes.post('/login', async (req, res) => {
   if (!user) {
     // Do not expose if user exists
     res.render('login', { error: 'Fel användarnamn eller lösenord' })
-  }
-
-  // Check if user is business or admin
-  if (user.type !== 'admin' && user.type !== 'business') {
-    res.render('login', { error: 'Bara företag kan logga in här' })
-    return
   }
 
   // Validate password

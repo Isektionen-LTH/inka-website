@@ -45,7 +45,8 @@ class Auth {
   static requireSignedIn(req, res, next) {
     // Check if username is set in session
     if (!req.session.username) {
-      res.status(401).send('User has to be signed in')
+      //res.status(401).send('User has to be signed in')
+      res.redirect('/login')
     }
     else {
       next()
