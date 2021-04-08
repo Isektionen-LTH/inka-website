@@ -3,6 +3,7 @@ version: "3.5"
 services:
     proxy:
         image: caddy
+        restart: always
         ports:
             - "80:80"
             - "443:443"
