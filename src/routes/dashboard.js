@@ -79,9 +79,16 @@ router.post('/business/create', Auth.requireAdminPrivileges, async (req, res) =>
     inka: ''
   }
 
+  // Check that only allowed fields are entered
   const rawData = req.body
   if (!Utils.isSibling(rawData, createBusinessDefault)) {
     res.status(400).send()
+    return
+  }
+
+  // Check if a business with that name already exists
+  if (await DB.findUser(rawData.username)) {
+    res.status(409).send()
     return
   }
 
