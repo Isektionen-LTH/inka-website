@@ -59,18 +59,27 @@ html, body {
   text-align: right;
 }
 
-#section1 {
-  background-image: url(/img/section1-background.jpg);
+#section1,#contactsection1 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  
+  
+}
+#section1 {
+  background-image: url(/img/section1-background.jpg);
+  height: 90vh;
   -webkit-box-shadow: inset 0px 300px 200px -200px #000000;
   -moz-box-shadow: inset 0px 300px 200px -200px #000000;
   box-shadow: inset 0px 300px 200px -200px #000000;
-
-  height: 110vh;
 }
-
+#contactsection1 {
+  height: 70vh;
+  background-color: #eacdc2;
+  -webkit-box-shadow: inset 0px 300px 200px -200px #000000;
+  -moz-box-shadow: inset 0px 300px 200px -200px #000000;
+  box-shadow: inset 0px 250px 200px -200px #000000;
+}
 #jumbotronContent {
   margin-top: -2rem;
 }
@@ -96,16 +105,18 @@ html, body {
   font-size: 3rem;
 }
 
-#section2 {
-  background-color: #B75D69;
-  color: #FFFFFF;
+#section2, #eventSection2 {
   min-height: 95vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+#section2 {
+  background-color: #B75D69;
+  color: #FFFFFF;
+}
 
-#section2 .text {
+#section2 .text, #eventSection2 .text {
   padding-top: 10rem;
   padding-bottom: 10rem;
 }
@@ -121,6 +132,7 @@ html, body {
   float: right;
   height: 110vh;
   z-index: 100;
+  max-width: 20rem;
 }
 
 @media(max-width: 1199px) {
@@ -130,6 +142,7 @@ html, body {
 
   #section2 #featherImage {
     right: 5rem;
+    padding-block-start: 10rem;
   }
 }
 
@@ -152,7 +165,7 @@ html, body {
   font-weight: 900;
 }
 
-#events {
+#info {
   background-image: linear-gradient(to bottom, #f5f6fc50, #f5f6fc85), url(/img/events-background.jpg);
   background-position: center;
   background-repeat: no-repeat;
@@ -163,13 +176,20 @@ html, body {
   justify-content: space-between;
 }
 
-#events .text {
+#eventsInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color:#eacdc2
+}
+
+#info .text, #eventsInfo .text {
   color: #000000;
   text-align: center;
   padding-top: 5rem;
 }
 
-#events .text h2 {
+#info .text h2 {
   font-weight: 900;
 }
 

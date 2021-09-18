@@ -1,30 +1,10 @@
 doctype html
 html(lang='sv')
   head
-    meta(charset='utf-8')
-    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-
-    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css' integrity='sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2' crossorigin='anonymous')
-    link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='anonymous')
-    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;900&display=swap', crossorigin='anonymous')
-    link(rel='stylesheet' href='/css/style.css')
-    link(rel='shortcut icon' href='favicon.ico')
-
-    title INKA 2021
+   include includes/head.pug
 
   body
-    img#navbarLogo(src='/img/navbar-logo.svg')
-    nav#navbar.navbar.navbar-expand-lg.navbar-dark
-      button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent')
-        span.navbar-toggler-icon
-      #navbarSupportedContent.collapse.navbar-collapse
-        ul.navbar-nav
-          li.nav-item.mr-4.active
-            a.nav-link(href='#businesses') Företag
-          li.nav-item.mr-4.active
-            a.nav-link(href='#events') Event
-          li.nav-item.mr-4.active
-            a.nav-link(href='#contact') Kontakt
+    include includes/navbar.pug
     #section1
       img#navbarLip(src='/img/navbar-lip.svg')
       #jumbotronContent
@@ -35,85 +15,33 @@ html(lang='sv')
         .row
           .col.col-lg-6.text.pr-md-5
             h2 Vad är Inka?
-            p INKA-mässan är sektionens årliga arbetsmarknadsdagar som i år anordnas i december. Syftet är att studenter på sektionen för Industriell Ekonomi och intressanta arbetsgivare ska möta varandra. Dessa möten sker i olika format. Under INKA-veckan anordnas lunchföreläsningar, casetävling, AW, kontaktsamtal, mingelmorgon och givetvis en mässa där studenter får mingla med företagsrepresentanter från olika företag. Mässdagen avslutas sedan med en pampig bankett! För att förbereda och inspirera studenterna hålls även pre-INKA 4-8 oktober. Mer uppdateringar om INKA kommer!
+            p INKA-mässan är sektionens årliga arbetsmarknadsdagar som i år anordnas i december. Syftet är att studenter på sektionen för Industriell Ekonomi och intressanta arbetsgivare ska möta varandra. Dessa möten sker i olika format. Under INKA-veckan anordnas lunchföreläsningar, casetävling, AW, kontaktsamtal, mingelmorgon och givetvis en mässa där studenter får mingla med företagsrepresentanter från olika företag. Mässdagen avslutas sedan med en pampig bankett!
           .col.d-none.d-lg-block.image
-            img#featherImage(src='/img/feather.svg')
+            img#featherImage(src='/img/feather2.png')
       #section2WaveBottom
         img(src='/img/section2-wave-bottom.svg')
     #section3
       .container
         .row
           .col.col-lg-8
-    #events
+            h2 Pre-INKA
+            p Pre INKA närmar sig med stormsteg och vi i projektgruppen är oerhört taggade på att kickstarta INKA säsongen! Pre INKA finns till för att inspirera och förbereda studenter på den riktiga mässan i December och under en vecka så kommer schemat vara fullspäckat med events och annat roligt! Veckan påbörjas med en inspirationsföreläsning med 180 degrees consulting, för att sedan fortsätta med CV-gransking tillsammans med Sveriges Ingenjörer. Veckan avslutas sedan med en lunchföreläsning och en väldigt efterlängtad I-Pub!
+    #info
       .container
         .row
           .col.text
-            
         .row
           .col
-           
+          img(src='/img/timeline.svg')
       #businessesHeader
         h2 Företag &amp; sponsorer
     #businesses
-      .container
-        .row
-          each business in businesses
-            if business.media && business.media.logo
-              .col-4.business-thumbnail.p-2.mb-4(onclick= `showBusiness('${business.username}')`)
-                img.img-fluid(src= `/media/${business.username}/${business.media.logo.name}`, alt= business.name)
-      
-      #businessInfoModal.modal(tabindex='-1')
-        .modal-dialog.modal-lg
-          .modal-content
-            .modal-header
-              h4#businessName.modal-title
-              button.close(type='button', data-dismiss='modal', aria-label='Close')
-                span(aria-hidden= 'true') &times;
-            .modal-body
-              .container-fluid
-                .row
-                  .col-12.col-lg-6
-                    h5 Om oss
-                    p#businessAbout
-                  .col
-                    h5 I:ares roll hos oss
-                    p#businessRole
-                    h5 Vi erbjuder
-                    ul#businessOffers
-            img.wave-bottom(src='/img/business-info-modal-wave.svg')
-            .modal-footer
-              .container-fluid
-                .row
-                  a#businessWebsiteLink
-                    img(src='/img/social-website-dark.svg')
-                  a#businessLinkedinLink
-                    img(src='/img/social-linkedin-dark.svg')
-                  a#businessFacebookLink
-                    img(src='/img/social-facebook-dark.svg')
-                  a#businessInstagramLink
-                    img(src='/img/social-instagram-dark.svg')
+      include includes/business.pug
 
       #businessesWaveBottom
         img(src='/img/businesses-wave-bottom.svg')
     #contact
-      #socialIcons
-        a(href='https://www.linkedin.com/company/sektionen-f%C3%B6r-industriell-ekonomi/')
-          img(src='/img/social-linkedin.svg')
-        a(href='https://www.facebook.com/Isektionen')
-          img(src='/img/social-facebook.svg')
-        a(href='https://www.instagram.com/inkamassan')
-          img(src='/img/social-instagram.svg')
-      #contactInfo
-        p
-          | Naturvetarvägen 14, 223 62 Lund
-          br
-          a(href='mailto:inka@isek.se') inka@isek.se
-      #isekLogoText
-        a(href='https://isek.se')
-          img(src='/img/footer-isek-logo.svg')
+      include includes/footer.pug
 
     // jQuery, Popper.js, and Bootstrap JS
-    script(src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous')
-    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js' integrity='sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN' crossorigin='anonymous')
-    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js' integrity='sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s' crossorigin='anonymous')
-    script(src='/js/main.js')
+    include includes/scripts.pug

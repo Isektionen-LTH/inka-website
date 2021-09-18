@@ -1,0 +1,38 @@
+#businesses
+  .container
+    .row
+      each business in businesses
+        if business.media && business.media.logo
+          .col-4.business-thumbnail.p-2.mb-4(onclick= `showBusiness('${business.username}')`)
+            img.img-fluid(src= `/media/${business.username}/${business.media.logo.name}`, alt= business.name)
+
+  #businessInfoModal.modal(tabindex='-1')
+    .modal-dialog.modal-lg
+      .modal-content
+        .modal-header
+          h4#businessName.modal-title
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden= 'true') &times;
+        .modal-body
+          .container-fluid
+            .row
+              .col-12.col-lg-6
+                h5 Om oss
+                p#businessAbout
+              .col
+                h5 I:ares roll hos oss
+                p#businessRole
+                h5 Vi erbjuder
+                ul#businessOffers
+        img.wave-bottom(src='/img/business-info-modal-wave.svg')
+        .modal-footer
+          .container-fluid
+            .row
+              a#businessWebsiteLink
+                img(src='/img/social-website-dark.svg')
+              a#businessLinkedinLink
+                img(src='/img/social-linkedin-dark.svg')
+              a#businessFacebookLink
+                img(src='/img/social-facebook-dark.svg')
+              a#businessInstagramLink
+                img(src='/img/social-instagram-dark.svg')

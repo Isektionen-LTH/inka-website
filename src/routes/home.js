@@ -10,7 +10,18 @@ routes.get('/', async (req, res) => {
   const businesses = await DB.getBusinesses()
   res.render('index', { businesses })
 })
-
+routes.get('/events',async (req, res)  =>{
+  const businesses = await DB.getBusinesses()
+  res.render('events', {businesses})
+})
+routes.get('/contact',async (req, res)  =>{
+  const businesses = await DB.getBusinesses()
+  res.render('contact', {businesses})
+})
+routes.get('/companies',async (req, res)  =>{
+  const businesses = await DB.getBusinesses()
+  res.render('companies', {businesses})
+})
 routes.get('/login', (req, res) => {
   if (Auth.signedInUser(req)) {
     res.redirect('/dashboard')
