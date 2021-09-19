@@ -11,7 +11,7 @@ class Mailer {
     static getSender() {
         return {
             name: config.mailer.senderName,
-            address: config.mailer.auth.user
+            address: config.mailer.senderAddress,
         }
     }
 

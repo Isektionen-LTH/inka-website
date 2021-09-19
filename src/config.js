@@ -18,13 +18,16 @@ const config = {
   },
   mailer: {
     senderName: 'INKA Företagssida',
+    senderAddress: "inka@isek.se",
     host: 'localhost',
     port: '-1',
     secure: true,
     auth: {
+      type: 'OAuth2',
       user: '',
-      pass: ''
-    }
+      serviceClient: '',
+      privateKey: '',
+    },
   },
   businesses: {
     registrationAddons: [
@@ -69,8 +72,9 @@ if (process.env.NODE_ENV === 'production') {
   config.domain = process.env.DOMAIN
   config.mailer.host = process.env.MAILER_SMTP_HOST
   config.mailer.port = process.env.MAILER_SMTP_PORT
-  config.mailer.auth.user = process.env.MAILER_USERNAME
-  config.mailer.auth.pass = process.env.MAILER_PASSWORD
+  config.mailer.auth.user = process.env.MAILER_AUTH_USER
+  config.mailer.auth.serviceClient = process.env.MAILER_AUTH_SERVICE_CLIENT
+  config.mailer.auth.privateKey = process.env.MAILER_AUTH_PRIVATE_KEY
 }
 
 module.exports = config
