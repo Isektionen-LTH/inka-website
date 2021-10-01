@@ -62,20 +62,19 @@ html, body {
 #section1,#contactsection1 {
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
-  
-  
+  background-repeat: no-repeat; 
 }
 #section1 {
   background-image: url(/img/section1-background.jpg);
-  height: 90vh;
+  height: 80vh;
   -webkit-box-shadow: inset 0px 300px 200px -200px #000000;
   -moz-box-shadow: inset 0px 300px 200px -200px #000000;
   box-shadow: inset 0px 300px 200px -200px #000000;
 }
 #contactsection1 {
   height: 70vh;
-  background-color: #eacdc2;
+  max-width: 100%;
+  background-image: url(/img/team_inka_background.jpg);
   -webkit-box-shadow: inset 0px 300px 200px -200px #000000;
   -moz-box-shadow: inset 0px 300px 200px -200px #000000;
   box-shadow: inset 0px 250px 200px -200px #000000;
@@ -116,7 +115,7 @@ html, body {
   color: #FFFFFF;
 }
 
-#section2 .text, #eventSection2 .text {
+#section2 .text {
   padding-top: 10rem;
   padding-bottom: 10rem;
 }
@@ -151,6 +150,12 @@ html, body {
   top: 2px;
   left: 2px;
 }
+#section1WaveBottom {
+  position: relative;
+  top: -6.55rem;
+  left: 2px;
+  
+}
 
 #section3 {
   background-color: #eacdc2;
@@ -166,11 +171,12 @@ html, body {
 }
 
 #info {
-  background-image: linear-gradient(to bottom, #f5f6fc50, #f5f6fc85), url(/img/events-background.jpg);
+  background-image:  url(/img/pre-inka-schema.png);
+  background-color: #b75d69;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
-  height: 120vh;
+  background-size:contain;
+  height: 105vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
