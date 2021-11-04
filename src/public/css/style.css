@@ -87,6 +87,9 @@ html, body {
   #jumbotronContent {
     margin-top: 0;
   }
+  #info {
+    max-height: 60vh;
+  }
 }
 
 #jumbotronContent * {
@@ -171,12 +174,12 @@ html, body {
 }
 
 #info {
-  background-image:  url(/img/pre-inka-schema.png);
-  background-color: #b75d69;
+  background-image:  url(/img/TeamINKA21.png);
+  background-color: white;
+  height: 140vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size:contain;
-  height: 105vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
