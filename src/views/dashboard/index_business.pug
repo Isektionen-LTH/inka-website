@@ -60,35 +60,6 @@ html
                 em= business.billing.orgNumber
           .row.mt-5
             .col
-              h3 Anmälan
-          .row.mb-1
-            .col
-              label
-                strong Deltagande
-              p
-                case business.registration.participation
-                  when 'physical'
-                    em Den fysiska mässan
-                  when 'digital'
-                    em Den digitala mässan
-                  when 'both'
-                    em Både den fysiska och digitala mässan
-          .row
-            .col
-              label
-                strong Tillägg 
-
-              .form-check
-                input.form-check-input(type='checkbox', disabled, checked)
-                label.form-check-label Baspaket (ingår i grunderbjudandet)
-
-              each addon in business.registration.addons
-                .form-check
-                  input.form-check-input(type='checkbox', disabled, checked= addon.value)
-                  label.form-check-label
-                    em= addon.name + (addon.price !== 0 ? ' (' + addon.price + ' kr)' : '' )
-          .row.mt-5
-            .col
               h3 Marknadsföringsinformation
           .row
             .col
