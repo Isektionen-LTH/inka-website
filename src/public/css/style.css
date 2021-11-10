@@ -59,7 +59,7 @@ html, body {
   text-align: right;
 }
 
-#section1,#contactsection1 {
+#section1 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat; 
@@ -71,14 +71,7 @@ html, body {
   -moz-box-shadow: inset 0px 300px 200px -200px #000000;
   box-shadow: inset 0px 300px 200px -200px #000000;
 }
-#contactsection1 {
-  height: 70vh;
-  max-width: 100%;
-  background-image: url(/img/team_inka_background.jpg);
-  -webkit-box-shadow: inset 0px 300px 200px -200px #000000;
-  -moz-box-shadow: inset 0px 300px 200px -200px #000000;
-  box-shadow: inset 0px 250px 200px -200px #000000;
-}
+
 #jumbotronContent {
   margin-top: -2rem;
 }
@@ -185,14 +178,8 @@ html, body {
   justify-content: space-between;
 }
 
-#eventsInfo {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color:#eacdc2
-}
 
-#info .text, #eventsInfo .text {
+#info .text {
   color: #000000;
   text-align: center;
   padding-top: 5rem;
@@ -200,6 +187,12 @@ html, body {
 
 #info .text h2 {
   font-weight: 900;
+}
+#section3 a:link, #section3 a:visited{
+  color:#000000;
+}
+#section3 a:hover, #section3 a:active {
+  background-color: #FFFFFF;
 }
 
 #businessesHeader {
