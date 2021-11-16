@@ -330,3 +330,9 @@ html, body {
 #contact #isekLogoText img {
   width: 15rem;
 }
+a.login {
+  font-size: 0.8rem;
+}
+a.login:hover {
+  font-size: 1rem;
+}
