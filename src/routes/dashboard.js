@@ -190,7 +190,7 @@ router.post('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
 
   // Sanitize input
   const rawData = Utils.parseMultipartObject(req.body)
-  
+
   //if (!Utils.isSubset(rawData, businessEditDefaults)) {
   //  res.status(400).send()
   //  return
@@ -198,6 +198,11 @@ router.post('/edit', Auth.requireBusinessPrivileges, async (req, res) => {
 
   // Merge the body with defaults to provide defaults for empty arrays
   const data = Utils.mergeDeep(businessEditDefaults, rawData)
+
+  // Make sure that offers is an array
+  if (!Array.isArray(data.info.offers)) {
+    data.info.offers = [data.info.offers]
+  }
 
   const business = await DB.findUser(req.session.username)
   const merged = Utils.mergeDeep(business, data)
@@ -407,6 +412,10 @@ router.post('/:business/edit', Auth.requireAdminPrivileges, async (req, res) => 
   const data = Utils.mergeDeep(adminEditDefaults, rawData)
   data.nonProfit = data.nonProfit == 'true'
 
+  // Make sure that offers is an array
+  if (!Array.isArray(data.info.offers)) {
+    data.info.offers = [data.info.offers]
+  }
   const business = await DB.findUser(req.params.business)
   // TODO Probably do file check here
   const merged = Utils.mergeDeep(business, data)
