@@ -180,12 +180,7 @@ html, body {
   flex-direction: column;
   justify-content: space-between;
 }
-#info img{
-  max-block-size: 70vh;
-  border: solid 0.2rem black;
-  border-radius: 35%;
-  max-width: 100%;
-}
+
 #info .container {
   text-align: center;
 }
